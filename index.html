@@ -1,156 +1,224 @@
-<?php
-  // home page
-  include __DIR__ . '/components/header.php';
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Shine & Sparkle </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
 
-  <!-- HERO -->
-  <section class="section hero container">
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <!-- Slide 1 -->
-        <div class="swiper-slide hero-slide">
-          <div class="hero-copy">
-            <h1>Professional Home & Office Cleaning</h1>
-            <p>Reliable pros, eco-friendly products, and flexible scheduling. Sit back—we’ll handle the mess.</p>
-            <div class="cta">
-              <a href="#book" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book a Clean</a>
-              <a href="#services" class="btn btn-ghost"><i class="fa-solid fa-splotch"></i> Our Services</a>
-            </div>
-          </div>
-          <div class="hero-media">
-            <img class="photo" src="images/hero-1.jpg" alt="Team performing home cleaning" />
-          </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="swiper-slide hero-slide">
-          <div class="hero-copy">
-            <h1>Move In/Out Cleaning, Done Right</h1>
-            <p>Detailed deep cleans to help you get deposits back or welcome your new tenants in style.</p>
-            <div class="cta">
-              <a href="#book" class="btn btn-primary"><i class="fa-solid fa-box"></i> Get a Quote</a>
-              <a href="#services" class="btn btn-ghost"><i class="fa-solid fa-screwdriver-wrench"></i> See Details</a>
-            </div>
-          </div>
-          <div class="hero-media">
-            <img class="photo" src="images/hero-2.jpg" alt="Move-out deep cleaning" />
-          </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="swiper-slide hero-slide">
-          <div class="hero-copy">
-            <h1>Airbnb Turnover Specialists</h1>
-            <p>Fast turnovers, hotel-style staging, and restocking to keep your reviews sparkling.</p>
-            <div class="cta">
-              <a href="#book" class="btn btn-primary"><i class="fa-solid fa-stars"></i> Schedule Turnover</a>
-              <a href="#services" class="btn btn-ghost"><i class="fa-solid fa-circle-info"></i> Learn More</a>
-            </div>
-          </div>
-          <div class="hero-media">
-            <img class="photo" src="images/hero-3.jpg" alt="Airbnb staging and cleaning" />
-          </div>
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </section>
+<body>
+<!-- page wrapper start -->
+<div class="page-wrapper">
 
-  <!-- SERVICES STRIP -->
-  <section id="services" class="section services">
+  <!-- header start -->
+  <header class="header js-header">
     <div class="container">
-      <h2 style="text-align:center">Our Cleaning Services</h2>
-      <p class="lead" style="text-align:center">Click any service to view details or jump to booking.</p>
-
-      <div class="services-grid">
-        <a class="service-card" href="#book" data-service="House Cleaning">
-          <span class="index">01</span>
-          <h3><i class="fa-solid fa-house-chimney"></i> House Cleaning</h3>
-          <p>Recurring or one-time visits. Kitchens, bathrooms, bedrooms, living spaces.</p>
-          <span class="go">Book <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="service-card" href="#book" data-service="Office Cleaning">
-          <span class="index">02</span>
-          <h3><i class="fa-solid fa-briefcase"></i> Office Cleaning</h3>
-          <p>After-hours service, waste removal, dusting, sanitizing, and common areas.</p>
-          <span class="go">Book <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="service-card" href="#book" data-service="Move In/Out Cleaning">
-          <span class="index">03</span>
-          <h3><i class="fa-solid fa-truck-moving"></i> Move In/Out</h3>
-          <p>Top-to-bottom deep cleans for empty units. Appliances, baseboards, inside cabinets.</p>
-          <span class="go">Book <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="service-card" href="#book" data-service="Airbnb Cleaning">
-          <span class="index">04</span>
-          <h3><i class="fa-solid fa-key"></i> Airbnb Cleaning</h3>
-          <p>Turnovers with laundry, staging, and restocking between guest stays.</p>
-          <span class="go">Book <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
+      <div class="logo">
+        <a href="#">Shine <span>& Sparkle</span></a>
       </div>
-
-      <div class="cta-row">
-        <a href="#book" class="btn btn-primary"><i class="fa-solid fa-calendar-days"></i> Book a Service</a>
-      </div>
+      <button type="button" class="nav-toggler js-nav-toggler">
+        <span></span>
+      </button>
+      <nav class="nav js-nav">
+        <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#info">INFO</a></li>
+              <div class="sub-menu-1">
+                <ul>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">FAQ</a></li>
+                </ul>
+              </div>
+            <li><a href="#service-inquiries">SERVICE INQUIRIES</a></li>
+            <li><a href="#profile">PROFILE</a></li>
+            <li><a href="#wallet">WALLET</a></li>
+            <li><button class="btnLogin-popup">Login</button></li>
+        </ul>
+      </nav>
     </div>
-  </section>
+  </header>
+  <!-- header end -->
 
-  <!-- WHAT WE PROVIDE -->
-  <section class="section provide">
-    <div class="container provide-wrap">
-      <div>
-        <h2>What We Provide</h2>
-        <p class="lead">Quickly preview what each service includes. Click a chip to switch.</p>
-        <div class="tabs" role="tablist" aria-label="Service tabs">
-          <button class="tab" role="tab" aria-selected="true" data-tab="house">House Cleaning</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="office">Office Cleaning</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="move">Move In/Out</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="airbnb">Airbnb</button>
-        </div>
-
-        <article class="provide-card" id="provide-card">
-          <h3 id="provide-title">House Cleaning — Essentials</h3>
-          <p id="provide-text">Dusting, vacuuming, mopping, bathroom sanitation, kitchen wipe-downs, and tidy-up. Add-ons: inside fridge/oven, interior windows, and laundry folding.</p>
-        </article>
-      </div>
-
-      <figure>
-        <img id="provide-img" class="preview" src="images/provide-house.jpg" alt="Example of house cleaning" />
-      </figure>
-    </div>
-  </section>
-
-  <!-- BOOK -->
-  <section id="book" class="section" style="background:var(--bg-alt)">
+  <!-- home section start -->
+   <section class="home" id="home">
     <div class="container">
-      <h2 style="text-align:center">Book Your Cleaning</h2>
-      <p class="lead" style="text-align:center">Choose a service and preferred time. We’ll confirm within minutes.</p>
-      <form class="container" style="max-width:760px; background:#fff; border:1px solid #eef0f6; border-radius:18px; padding:20px; box-shadow:var(--shadow)">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
-          <label>Full Name<br><input required type="text" placeholder="Jane Doe" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px"></label>
-          <label>Phone<br><input required type="tel" placeholder="(555) 555-5555" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px"></label>
-          <label>Email<br><input required type="email" placeholder="you@example.com" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px"></label>
-          <label>Service<br>
-            <select id="service-select" required style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px">
-              <option value="House Cleaning">House Cleaning</option>
-              <option value="Office Cleaning">Office Cleaning</option>
-              <option value="Move In/Out Cleaning">Move In/Out Cleaning</option>
-              <option value="Airbnb Cleaning">Airbnb Cleaning</option>
-            </select>
-          </label>
-          <label style="grid-column:1/-1">Address<br><input required type="text" placeholder="123 Main St, City" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px"></label>
-          <label>Date<br><input required type="date" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px"></label>
-          <label>Time<br><input required type="time" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px"></label>
-          <label style="grid-column:1/-1">Notes (optional)<br>
-            <textarea rows="4" placeholder="Pets, parking instructions, special requests…" style="width:100%; padding:12px 14px; border:1px solid #e6eaf3; border-radius:12px; resize:vertical"></textarea>
-          </label>
+      <div class="grid">
+        <div class="home-text">
+          <h1>Need Cleaning Services ?</h1>
+          <p>Looking for reliable and affordable cleaning solutions?
+          Our professional team provides thorough home and office cleaning
+          tailored to your needs. From regular maintenance to deep cleaning,
+          we ensure a spotless space so you can enjoy comfort, convenience,
+          and peace of mind.</p>
+          <div class="btn-wrap">
+            <a href="#info" class="btn">know more</a>
+          </div>
+        </div> 
+        <div class="home-img">
+          <div class="circle-wrap">
+            <div class="circle"></div>
+          </div>
+          <img src="c:\Users\HP\Downloads\home-img.png" alt="img">
         </div>
-        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:14px">
-          <button type="reset" class="btn btn-ghost">Clear</button>
-          <button type="submit" class="btn btn-primary">Request Booking</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </section>
+   </section>
+  <!-- home section end -->
 
-<?php
-  include __DIR__ . '/components/footer.php';
-?>
+  <div class="wrapper">
+        <span class="icon-close">
+          <ion-icon name="close"></ion-icon>
+        </span>
+
+        <div class="form-box login">
+          <h2>LOGIN</h2>
+          <form action="#"></form>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="mail"></ion-icon>
+              </span>
+              <input type="email" required></input>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="lock-closed"></ion-icon>
+              </span>
+              <input type="password" required></input>
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox">Remember me</label>
+              <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="login-register">
+              <p>Don't have an account? <a href="#"
+              class="register-link">Register</a></p>
+            </div>
+          </form>
+        </div>
+
+        <div class="form-box register">
+          <h2>REGISTRATION</h2>
+          <form action="#">
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="person"></ion-icon>
+              </span>
+              <input type="text" required></input>
+              <label>Username</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="mail"></ion-icon>
+              </span>
+              <input type="email" required></input>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="lock-closed"></ion-icon>
+              </span>
+              <input type="password" required></input>
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox">I agree to the terms & conditions</label>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <div class="login-register">
+              <p>Already have an account? <a href="#"
+              class="login-link">Login</a></p>
+            </div>
+          </form>
+        </div>
+  </div>
+
+  <!-- footer start -->
+  <footer class="footer">
+  <div class="container footer-container">
+
+    <!-- Follow Us -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li><a href="#"><ion-icon name="logo-facebook"></ion-icon> Facebook</a></li>
+        <li><a href="#"><ion-icon name="logo-instagram"></ion-icon> Instagram</a></li>
+        <li><a href="#"><ion-icon name="logo-twitter"></ion-icon> Twitter</a></li>
+        <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon> LinkedIn</a></li>
+      </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#service-inquiries">Our Services</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+
+    <!-- Find Us -->
+    <div class="footer-col">
+      <h3>Find Us</h3>
+      <p><ion-icon name="location-outline"></ion-icon>
+            <strong>Address:</strong> D4-35-8, No 8, Cleaning Street, 50800 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia
+      </p>
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127482.68785497975!2d101.6869895!3d3.1385058999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc362abd08e7d3%3A0x232e1ff540d86c99!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur!5e0!3m2!1sen!2smy!4v1756106719199!5m2!1sen!2smy"
+          width="600" heigh="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <br>
+      <p><ion-icon name="call-outline"></ion-icon>
+            <strong>Customer Care Line:</strong> +60 12-345 6789
+      </p>
+      <p><ion-icon name="time-outline"></ion-icon>
+            <strong>Operating Hours:</strong><br> Mon - Sat: 9:00 AM - 6:00 PM<br> Sun: Closed
+      </p>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Copyright 2025, Shine & Sparkle. All Rights Reserved.</p>
+  </div>
+  </footer>
+  <!-- footer end -->
+
+</div>
+<!-- page wrapper end -->
+
+
+<!-- style switcher start -->
+<div class="style-switcher js-style-switcher">
+  <button type="button" class="style-switcher-toggler js-style-switcher-toggler">
+    <i class="fas fa-cog"></i>
+  </button>
+  <div class="style-switcher-main">
+    <h2>style switcher</h2>
+    <div class="style-switcher-item">
+      <p>Theme Color</p>
+      <div class="theme-class">
+        <input type="range" min="0" max="360" class="hue-slider js-hue-slider">
+        <div class="hue"><span class="js-hue"></span></div>
+      </div>
+    </div>
+    <div class="style-switcher-item">
+
+    </div>
+  </div>
+</div>
+<!-- style switcher end -->
+
+<script src="script.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
