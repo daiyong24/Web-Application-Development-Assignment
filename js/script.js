@@ -31,3 +31,28 @@ btnPopup.addEventListener('click', ()=> {
 iconClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup');
 });
+
+/* dropdown menu-bar ion-icon  */
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".dropdown .dropbtn").forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+
+      // close other dropdowns
+      document.querySelectorAll(".dropdown").forEach(d => {
+        if (d !== parent) d.classList.remove("active");
+      });
+
+      // toggle the current one
+      parent.classList.toggle("active");
+    });
+  });
+
+  // close dropdown if clicked outside
+  document.addEventListener("click", function(e) {
+    if (!e.target.closest(".dropdown")) {
+      document.querySelectorAll(".dropdown").forEach(d => d.classList.remove("active"));
+    }
+  });
+});
