@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
 </head>
-
 <body>
+
 <!-- page wrapper start -->
 <div class="page-wrapper">
 
@@ -39,13 +40,23 @@
                 SERVICE INQUIRIES <ion-icon name="caret-down-outline"></ion-icon> 
               </a> 
               <ul class="sub-menu-1"> 
-                <li><a href="#">Office Cleaning</a></li> 
-                <li><a href="#">House Cleaning</a></li> 
-                <li><a href="#">Move In / Move Out</a></li> 
-                <li><a href="#">Airbnb Cleaning</a></li> 
+                <li><a href="#office-cleaning">Office Cleaning</a></li> 
+                <li><a href="#house-cleaning">House Cleaning</a></li> 
+                <li><a href="#move-in-out">Move In / Move Out</a></li> 
+                <li><a href="#airbnb-cleaning">Airbnb Cleaning</a></li> 
               </ul> 
             </li>
-            <li><a href="#profile">PROFILE</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0);" class="dropbtn">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                PROFILE <ion-icon name="caret-down-outline"></ion-icon>  
+              </a>
+              <ul class="sub-menu-1">
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="#">Booking History</a></li>
+                <li><a href="#">Translation History</a></li>
+              </ul>
+            </li>
             <li><a href="#wallet">WALLET</a></li>
             <li><button class="btnLogin-popup">Login</button></li>
         </ul>
@@ -79,6 +90,141 @@
     </div>
    </section>
   <!-- home section end -->
+
+  <!-- service inquiries section start -->
+  <section class="service-inquiries section-padding" id="service-inquiries">
+    <div class="container">
+      <div class="section-title">
+        <span class="title">service inquiries</span>
+        <h2 class="sub-title">Our Cleaning Services</h2>
+      </div>
+      <div class="grid">
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="c:\Users\HP\Downloads\houseCleaning-img.jpg" alt="house">
+          </div>
+          <h3>House Cleaning</h3>
+        </div>
+        <!-- service inquiries item end -->
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="c:\Users\HP\Downloads\officeCleaning-img.jpg" alt="office">
+          </div>
+          <h3>Office Cleaning</h3>
+        </div>
+        <!-- service inquiries item end -->
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="c:\Users\HP\Downloads\moveInmoveOut-img.jpg" alt="move">
+          </div>
+          <h3>Move In / Move Out</h3>
+        </div>
+        <!-- service inquiries item end -->
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="c:\Users\HP\Downloads\aribnbCleaning-img.jpg" alt="airbnb">
+          </div>
+          <h3>Airbnb Cleaning</h3>
+        </div>
+        <!-- service inquiries item end -->
+      </div>
+    </div>
+    <!-- book button -->
+    <div class="book-btn-wrapper">
+      <button class="book-btn">Book Now</button>
+    </div>
+  </section>
+  <!-- service inquiries section end-->
+
+  <!-- what we provided start -->
+  <section class="what-we-provided section-padding" id="provided">
+    <div class="container">
+      <div class="section-title">
+        <h2 class="section-heading">WHAT WE PROVIDED?</h2>
+      </div>
+      <!-- Swiper Slider -->
+      <div class="swiper provided-swiper">
+      <div class="swiper-wrapper">
+        
+        <!-- SLIDE 1: House + Office -->
+        <div class="swiper-slide">
+          <!-- House Cleaning Start -->
+          <div class="provided-row">
+            <div class="provided-img">
+              <img src="c:\Users\HP\Downloads\houseCleaning1-img.png" alt="House Cleaning">
+            </div>
+            <div class="provided-text">
+              <h3>House Cleaning</h3>
+              <p>
+                Our professional team provides thorough house cleaning services 
+                to keep your home sparkling and comfortable.
+              </p>
+            </div>
+          </div>
+          <!-- House Cleaning End -->
+
+          <!-- Office Cleaning Start -->
+          <div class="provided-row reverse">
+            <div class="provided-text">
+              <h3>Office Cleaning</h3>
+              <p>
+                We ensure your workspace stays fresh and hygienic, 
+                creating a productive environment for your staff.
+              </p>
+            </div>
+            <div class="provided-img">
+              <img src="c:\Users\HP\Downloads\officeCleaning1-img.webp" alt="Office Cleaning">
+            </div>
+          </div>
+          <!-- Office Cleaning End -->
+        </div>
+
+        <!-- SLIDE 2: Move In/Out + Airbnb -->
+        <div class="swiper-slide">
+          <!-- Move In/Out Cleaning Start -->
+          <div class="provided-row">
+            <div class="provided-img">
+              <img src="c:\Users\HP\Downloads\moveInmoveOut1-img.jpg" alt="Move In/Out Cleaning">
+            </div>
+            <div class="provided-text">
+              <h3>Move In / Move Out Cleaning</h3>
+              <p>
+                Moving is stressful enough – let us handle the deep cleaning 
+                so you can focus on settling into your new place.
+              </p>
+            </div>
+          </div>
+          <!-- Move In/Out Cleaning End -->
+
+          <!-- Airbnb Cleaning Start -->
+          <div class="provided-row reverse">
+            <div class="provided-text">
+              <h3>Airbnb Cleaning</h3>
+              <p>
+                Keep your Airbnb guests happy with our quick, reliable, 
+                and professional cleaning service between stays.
+              </p>
+            </div>
+            <div class="provided-img">
+              <img src="c:\Users\HP\Downloads\airbnbCleaning1-img.jpg" alt="Airbnb Cleaning">
+            </div>
+          </div>
+          <!-- Airbnb Cleaning End -->
+        </div>
+
+      </div>
+
+      <!-- Pagination & Navigation -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+  <!-- what we provided end-->
 
   <div class="wrapper">
         <span class="icon-close">
@@ -219,17 +365,22 @@
       <p>Theme Color</p>
       <div class="theme-class">
         <input type="range" min="0" max="360" class="hue-slider js-hue-slider">
-        <div class="hue"><span class="js-hue"></span></div>
+        <div class="hue">Hue: <span class="js-hue"></span></div>
       </div>
     </div>
     <div class="style-switcher-item">
-
+      <label class="form-switch">
+        <span>Dark Mode</span>
+        <input type="checkbox" class="js-dark-mode">
+        <div class="box"></div>
+      </label>
     </div>
   </div>
 </div>
 <!-- style switcher end -->
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
+<script src="js/style-switcher.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

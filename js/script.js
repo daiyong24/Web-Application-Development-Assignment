@@ -1,13 +1,17 @@
 /* header bg reveal */
 const headerBg = () => {
-    const header = documnet.querySelector(".js-header");
+    const header = document.querySelector(".js-header");
 
     window.addEventListener("scroll", function() {
         if(this.scrollY > 0){
-            header.classList.add()
+          header.classList.add("bg-reveal");
         }
-    })
+        else{
+          header.classList.remove("bg-reveal");
+        }
+    });
 }
+headerBg();
 
 /* login-popup & register-popup */
 const wrapper = document.querySelector('.wrapper');
@@ -54,5 +58,54 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!e.target.closest(".dropdown")) {
       document.querySelectorAll(".dropdown").forEach(d => d.classList.remove("active"));
     }
+  });
+
+ document.querySelectorAll(".dropdown .sub-menu-1 a").forEach(link => {
+  link.addEventListener("click", function() {
+    // Close dropdown after clicking
+    const dropdown = this.closest(".dropdown");
+    dropdown.classList.remove("active");
+  });
+});
+});
+
+/* service-inquiries */
+document.addEventListener("DOMContentLoaded", () => {
+  const serviceItems = document.querySelectorAll(".service-inquiries-item");
+  const bookBtn = document.getElementById("bookBtn");
+  const selectedServiceInput = document.getElementById("selectedService");
+
+  let selectedService = "";
+
+  // When a service item is clicked
+  serviceItems.forEach(item => {
+    item.addEventListener("click", () => {
+      // remove active from all
+      serviceItems.forEach(i => i.classList.remove("active"));
+      // add active to clicked one
+      item.classList.add("active");
+      selectedService = item.textContent.trim(); // save selected text
+    });
+  });
+
+  // When Book Now is clicked
+  bookBtn.addEventListener("click", () => {
+    if(selectedService === ""){
+      alert("Please select a service first!");
+      return;
+    }
+
+    // Fill the booking form field
+    selectedServiceInput.value = selectedService;
+
+    // Scroll to booking form
+    document.getElementById("bookingForm").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+document.querySelectorAll('.service-item').forEach(item => {
+  item.addEventListener('click', function () {
+    document.querySelectorAll('.service-item').forEach(el => el.classList.remove('active'));
+    this.classList.add('active');
   });
 });
