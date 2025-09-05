@@ -346,7 +346,7 @@ img{
 .dropdown{ 
     position: relative; 
 } 
-.sub-menu-1{ 
+.dropdown .sub-menu-1{ 
     max-height: 0; 
     overflow: hidden; 
     position: absolute; 
