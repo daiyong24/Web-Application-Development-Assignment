@@ -49,5 +49,10 @@
   <div class="footer-bottom">
     <p>&copy; Copyright 2025, Shine & Sparkle. All Rights Reserved.</p>
   </div>
+  
   </footer>
   <!-- footer end -->
+
+  <div class="loader">
+    <img src="./images/loader.gif" alt="">
+  </div>
