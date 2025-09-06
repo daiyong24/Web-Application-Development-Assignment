@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Shine & Sparkle - FAQ</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="css/style.css" />
+  <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
+
+    <style>
+        .faq-items{
+            border-bottom: 1px solid grey;
+            padding: 10px 0;
+        }
+
+        .faq-question{
+            border: none;
+            width: 100%;
+            font-size: 1.2rem;
+            text-align: left;
+            color: darkcyan;
+            cursor: pointer;
+            display: flex;
+            padding: 30px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .icon{
+            font-size: 1.5rem;
+        }
+
+        .faq-answer{
+            padding: 10px;
+            padding-bottom: 0%;
+            display: none;
+        }
+
+        .faq-question.active.icon{
+            content: "-";
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- header start -->
+  <header class="header js-header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">Shine <span>& Sparkle</span></a>
+      </div>
+      <button type="button" class="nav-toggler js-nav-toggler">
+        <span></span>
+      </button>
+      <nav class="nav js-nav">
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0);" class="dropbtn">
+                INFO <ion-icon name="caret-down-outline"></ion-icon>
+              </a>  
+              <ul class="sub-menu-1">
+                  <li><a href="aboutus.html">About Us</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="faq.html">FAQ</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0);" class="dropbtn"> 
+                SERVICE INQUIRIES <ion-icon name="caret-down-outline"></ion-icon> 
+              </a> 
+              <ul class="sub-menu-1"> 
+                <li><a href="#office-cleaning">Office Cleaning</a></li> 
+                <li><a href="#house-cleaning">House Cleaning</a></li> 
+                <li><a href="#move-in-out">Move In / Move Out</a></li> 
+                <li><a href="#airbnb-cleaning">Airbnb Cleaning</a></li> 
+              </ul> 
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0);" class="dropbtn">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                PROFILE <ion-icon name="caret-down-outline"></ion-icon>  
+              </a>
+              <ul class="sub-menu-1">
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="#">Booking History</a></li>
+                <li><a href="#">Translation History</a></li>
+              </ul>
+            </li>
+            <li><a href="#wallet">WALLET</a></li>
+            <li><button class="btnLogin-popup">Login</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- FAQ section starts -->
+  <section class="section-padding">
+    <div class="container">
+        <div class="section-title">
+            <h1 style="margin: 1.5rem; letter-spacing: 3px;">Frequently Asked Questions</h1>
+            <h3>Have a read through our FAQs for house cleaning services or contact us for help.</h3>
+        </div>
+
+        <div class="faq-items">
+            <button class="faq-question">
+                Do I need to provide cleaning supplies and equipment?
+                <span class="icon">+</span>   
+            </button>
+            <div class="faq-answer">
+                <p>A: No, our team brings all the necessary cleaning products and equipment. 
+                    We also use eco-friendly options to ensure safety for your family, pets, 
+                    and the environment.</p>
+            </div>
+        </div>
+
+        <div class="faq-items">
+            <button class="faq-question">
+                How long will the cleaning take?
+                <span class="icon">+</span>   
+            </button>
+            <div class="faq-answer">
+                <p>A: The duration depends on the size of your space and the type of service. 
+                    For example, a standard apartment cleaning usually takes 2 to 3 hours.</p>
+            </div>
+        </div>
+
+        <div class="faq-items">
+            <button class="faq-question">
+                What should I do before the cleaners arrive?
+                <span class="icon">+</span>   
+            </button>
+            <div class="faq-answer">
+                <p>A: To help our team work efficiently, we recommend tidying up personal 
+                    belongings and making sure fragile items are safely stored away. 
+                    We'll handle the rest!</p>
+            </div>
+        </div>
+
+        <div class="faq-items">
+            <button class="faq-question">
+                Can I request the same cleaner each time?
+                <span class="icon">+</span>   
+            </button>
+            <div class="faq-answer">
+                <p>A: Yes, we'll do our best to assign the same team for 
+                    recurring customers to ensure consistency and comfort.</p>
+            </div>
+        </div>
+
+    </div>
+  </section>
+  <!-- FAQ section ended -->
+
+  <div class="wrapper">
+        <span class="icon-close">
+          <ion-icon name="close"></ion-icon>
+        </span>
+
+        <div class="form-box login">
+          <h2>LOGIN</h2>
+          <form action="#"></form>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="mail"></ion-icon>
+              </span>
+              <input type="email" required></input>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="lock-closed"></ion-icon>
+              </span>
+              <input type="password" required></input>
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox">Remember me</label>
+              <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="login-register">
+              <p>Don't have an account? <a href="#"
+              class="register-link">Register</a></p>
+            </div>
+          </form>
+        </div>
+
+        <div class="form-box register">
+          <h2>REGISTRATION</h2>
+          <form action="#">
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="person"></ion-icon>
+              </span>
+              <input type="text" required></input>
+              <label>Username</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="mail"></ion-icon>
+              </span>
+              <input type="email" required></input>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="lock-closed"></ion-icon>
+              </span>
+              <input type="password" required></input>
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox">I agree to the terms & conditions</label>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <div class="login-register">
+              <p>Already have an account? <a href="#"
+              class="login-link">Login</a></p>
+            </div>
+          </form>
+        </div>
+  </div>
+
+<!-- footer start -->
+  <footer class="footer">
+  <div class="container footer-container">
+
+    <!-- Follow Us -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li><a href="#"><ion-icon name="logo-facebook"></ion-icon> Facebook</a></li>
+        <li><a href="#"><ion-icon name="logo-instagram"></ion-icon> Instagram</a></li>
+        <li><a href="#"><ion-icon name="logo-twitter"></ion-icon> Twitter</a></li>
+        <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon> LinkedIn</a></li>
+      </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="#service-inquiries">Our Services</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </div>
+
+    <!-- Find Us -->
+    <div class="footer-col">
+      <h3>Find Us</h3>
+      <p><ion-icon name="location-outline"></ion-icon>
+            <strong>Address:</strong> D4-35-8, No 8, Cleaning Street, 50800 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia
+      </p>
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127482.68785497975!2d101.6869895!3d3.1385058999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc362abd08e7d3%3A0x232e1ff540d86c99!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur!5e0!3m2!1sen!2smy!4v1756106719199!5m2!1sen!2smy"
+          width="600" heigh="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <br>
+      <p><ion-icon name="call-outline"></ion-icon>
+            <strong>Customer Care Line:</strong> +60 12-345 6789
+      </p>
+      <p><ion-icon name="time-outline"></ion-icon>
+            <strong>Operating Hours:</strong><br> Mon - Sat: 9:00 AM - 6:00 PM<br> Sun: Closed
+      </p>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Copyright 2025, Shine & Sparkle. All Rights Reserved.</p>
+  </div>
+  </footer>
+  <!-- footer end -->
+
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () =>
+    {
+        const questions =
+        document.querySelectorAll(".faq-question");
+
+        questions.forEach(question => {
+            question.addEventListener("click", ()=>{
+                question.classList.toggle("active");
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector(".icon");
+
+                if(answer.style.display == "block"){
+                    answer.style.display = "none";
+                    icon.textContent = "+";
+                } else {
+                    answer.style.display = "block";
+                    icon.textContent = "-";
+                }
+            })
+        })
+    })
+  </script>
+
+
+   <script src="js/script.js"></script>
+   <script src="js/style-switcher.js"></script>
+   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
