@@ -823,6 +823,10 @@ img{
         height: 120px;
         width: 120px;
     }
+    .service-inquiries-item.active{
+        border-width: 1.5px;
+        box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+    }
 }
 
 @media(max-width: 767px){
@@ -939,6 +943,15 @@ img{
     }
     .next-slide{
         right: 10px;
+    }
+    /* service-inquiries */
+    .service-inquiries-item .img-box{
+        height: 100px;
+        width: 100px;
+    }
+    .service-inquiries-item.active{
+        border-width: 1px;
+        box-shadow: 0 0 6px rgba(255, 0, 0, 0.35);
     }
 }
 
