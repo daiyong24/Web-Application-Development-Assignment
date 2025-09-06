@@ -982,3 +982,43 @@ img{
 .loader img{
    height: 25rem;
 }
+
+.moveInOutImg2{
+    grid-column: span 3;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 15px;
+}
+.moveInOutImg2 .img-box{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    box-shadow: var(--shadow);
+    background-color: var(--bg-color);
+    padding: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
+.moveInOutImg2 .img-box img{
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.moveInOutImg2 .img-box img{
+    transform: scale(1.2);
+}
+.moveInOutImg2 h3{
+    text-transform: capitalize;
+    font-size: var(--fs-x1);
+    font-weight: 500;
+}
+
+

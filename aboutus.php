@@ -70,7 +70,7 @@
               </a>  
               <ul class="sub-menu-1">
                   <li><a href="aboutus.php">About Us</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="contact.php">Contact Us</a></li>
                   <li><a href="faq.php">FAQ</a></li>
               </ul>
             </li>
