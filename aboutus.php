@@ -7,101 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link type="text/css" rel="stylesheet" href="css/style.css" />
   <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
-
-  <style>
-    .aboutus-section{
-        padding: 100px 100px 0px 70px;
-    }
-
-    .aboutus-section p{
-        text-align: justify;
-        margin-top: 20px;
-    }
-
-    .aboutus-section h1{
-        font-size: 2.5rem
-    }
-
-    .aboutus-section h2{
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .team-member{
-        display: flex;
-        align-items: center;
-        text-align: left;
-        gap: 50px;
-    }
-    
-    .team-container{
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .team-member img{
-        width: 500px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 50px;
-        box-shadow: 0 4px 10px black;
-    }
-  </style>
-
+  <link type="text/css" rel="stylesheet" href="css/style-inform.css" />
 </head>
 <body>
 
     <!-- header start -->
-  <header class="header js-header">
-    <div class="container">
-      <div class="logo">
-        <a href="index.html">Shine <span>& Sparkle</span></a>
-      </div>
-      <button type="button" class="nav-toggler js-nav-toggler">
-        <span></span>
-      </button>
-      <nav class="nav js-nav">
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropbtn">
-                INFO <ion-icon name="caret-down-outline"></ion-icon>
-              </a>  
-              <ul class="sub-menu-1">
-                  <li><a href="aboutus.php">About Us</a></li>
-                  <li><a href="contact.php">Contact Us</a></li>
-                  <li><a href="faq.php">FAQ</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropbtn"> 
-                SERVICE INQUIRIES <ion-icon name="caret-down-outline"></ion-icon> 
-              </a> 
-              <ul class="sub-menu-1"> 
-                <li><a href="#office-cleaning">Office Cleaning</a></li> 
-                <li><a href="#house-cleaning">House Cleaning</a></li> 
-                <li><a href="#move-in-out">Move In / Move Out</a></li> 
-                <li><a href="#airbnb-cleaning">Airbnb Cleaning</a></li> 
-              </ul> 
-            </li>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropbtn">
-                <ion-icon name="person-circle-outline"></ion-icon>
-                PROFILE <ion-icon name="caret-down-outline"></ion-icon>  
-              </a>
-              <ul class="sub-menu-1">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="#">Booking History</a></li>
-                <li><a href="#">Translation History</a></li>
-              </ul>
-            </li>
-            <li><a href="#wallet">WALLET</a></li>
-            <li><button class="btnLogin-popup">Login</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <?php include 'components/header.php'; ?>
   <!-- header end -->
 
   <section class="aboutus-section">

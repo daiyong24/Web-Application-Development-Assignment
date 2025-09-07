@@ -34,18 +34,22 @@ body {
   text-align: center;
 }
 
-.logo {
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 16px;
-  border-radius: 16px;
-  background: #e9f3fb;
-  display: grid;
-  place-items: center;
-  font-size: 38px;
-  color: #7aaedb;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+/* Remove the box style around logo */
+.brand .logo {
+  background: none;      /* remove blue bg */
+  box-shadow: none;      /* remove shadow */
+  width: auto;
+  height: auto;
+  margin-bottom: 10px;   /* small gap below logo */
 }
+
+.brand .logo img {
+  width: 250px ;
+  height: auto ;
+  display: block;
+  margin: 0 auto;
+}
+
 
 .brand h1 {
   margin: 0 0 8px;

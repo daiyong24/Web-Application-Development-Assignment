@@ -47,8 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
   <div class="wrap">
-    <div class="logo">Logo</div>
-    <h1>Shine & Sparkle</h1>
+    <div class="brand">
+      <div class="logo">
+        <img src="images/logo.png" alt="Shine & Sparkle Logo">
+      </div>
+      <h1>Shine & Sparkle</h1>
+    </div>
 
     <div class="card">
       <h2>Create Account</h2>

@@ -43,7 +43,9 @@ $justRegistered = isset($_GET['registered']) && $_GET['registered'] === '1';
   <div class="wrap">
     <!-- Left: Logo + tagline -->
     <div class="brand">
-      <div class="logo">Logo</div>
+      <div class="logo">
+        <img src="images/logo.png" alt="Shine & Sparkle Logo">
+      </div>
       <h1>Shine & Sparkle</h1>
       <p>Login to start your cleaning</p>
     </div>

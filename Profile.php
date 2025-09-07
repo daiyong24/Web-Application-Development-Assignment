@@ -76,17 +76,14 @@ $lastUpdated = $user['updated_at'] ? date('Y-m-d H:i:s', strtotime($user['update
   <link type="text/css" rel="stylesheet" href="css/style.css" />
   <link type="text/css" rel="stylesheet" href="css/style-profile.css" />
 </head>
-<body>
-
+<body class="profile-page">
+<?php include('components/header.php');?>
 <div class="profile-wrap container">
   <div class="profile-card">
-    <?php include('components/header.php');?>
-
     <!-- header -->
     <div class="profile-header">
       <div style="position:absolute; top:28px; width:100%; text-align:center;">
         <div class="header-name"><?= htmlspecialchars($user['name']) ?></div>
-        <div class="header-coin"><ion-icon name="cash-outline"></ion-icon><span>0.00 Coin</span></div>
       </div>
       <div class="avatar"><div class="circle"><ion-icon name="person-outline"></ion-icon></div></div>
     </div>
@@ -178,6 +175,7 @@ $lastUpdated = $user['updated_at'] ? date('Y-m-d H:i:s', strtotime($user['update
     el.type = el.type === 'password' ? 'text' : 'password';
   }
 </script>
+<script src="js/script.js"></script>
 <?php include('components/footer.php');?>
 </body>
 </html>
