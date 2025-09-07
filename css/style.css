@@ -1014,10 +1014,14 @@ img{
   object-fit: cover;                    
   display: block;
 }
+.moveInOutImg2 .move-paragraph strong{
+  color: #9bd5f3;
+  font-weight: 700;    
+}
 
 .moveInOutImg2 .move-paragraph{
   flex: 1 1 auto;                       
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.7;
 }
 .plans-row {
@@ -1027,11 +1031,47 @@ img{
   justify-content: center; 
 }
 
-.package_div {
-  flex: 1 1 250px;         
-  max-width: 300px;        
-  margin: 0 auto;          
+.package_div{
+  background:#fff;
+  border:1px solid #e6f3ff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(11,121,208,.08);
 }
+
+/* Header (plan name + prices) */
+.cd-pricing-header{
+  text-align:center;
+  padding:16px 12px;
+  background:#f2f9ff;         /* pale blue band */
+  border-bottom:1px solid #e6f3ff;
+}
+.cd-pricing-header h2{ color:#0f2742; }
+.cd-pricing-header del{ color:#8aa9c4; }
+
+/* Big price in blue */
+.cd-price{ color:#0b79d0; }
+
+/* Features strip */
+.cd-pricing-features{
+  background:#f9fcff;
+  border-top:1px solid #e6f3ff;
+  border-bottom:1px solid #e6f3ff;
+  text-align:center;
+}
+.cd-pricing-features li{ color:#5f6b7a; }
+
+/* Book button with light-blue gradient */
+.cd-pricing-footer .cd-select{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+  font-weight:800;
+  padding:14px 10px;
+  background:linear-gradient(90deg,#a8dffa,#4db3ff);
+}
+.cd-pricing-footer .cd-select:hover{ filter:brightness(.98); }
 
 .info-box {
   background: #A8DFFA;
@@ -1100,7 +1140,21 @@ img{
   color: #000;
 }
 
+.office .form-group label{
+    color:white;
+}
 
+.office .book-btn-wrapper{
+  grid-column: 1 / -1;   
+  justify-self: center;  
+  text-align: center;
+}
+
+.office .book-btn {
+  height: 52px;
+  padding: 0 28px;
+  font-weight: 700;
+}
 .form-group select {
   width: 100%;
   padding: 10px 12px;

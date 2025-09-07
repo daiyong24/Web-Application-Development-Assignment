@@ -57,13 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Redirect per selected service
       switch (selectedService) {
         case "House Cleaning":
-          window.location.href = "houseCleaning.php"; break;
+          window.location.href = "houseClean.php"; break;
         case "Office Cleaning":
-          window.location.href = "officeCleaning.php"; break;
+          window.location.href = "officeClean.php"; break;
         case "Move In / Move Out":
           window.location.href = "moveInOut.php"; break;
         case "Airbnb Cleaning":
-          window.location.href = "airbnbCleaning.php"; break;
+          window.location.href = "airbnbClean.php"; break;
         default:
           // Fallback: single booking page via query string
           window.location.href = "booking.php?service=" + encodeURIComponent(selectedService);
@@ -108,3 +108,30 @@ document.addEventListener("DOMContentLoaded", () => {
 function loader(){ const el = document.querySelector('.loader'); if (el) el.style.display = 'none'; }
 function fadeOut(){ setTimeout(loader, 3000); }
 window.onload = fadeOut;
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const bookBtn = document.querySelector(".book-btn");
+  if (!bookBtn) return;
+
+  bookBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const service = document.querySelector("#service")?.value;
+    const location = document.querySelector("#location")?.value;
+
+    if (!service) {
+      alert("Please select a service first.");
+      return;
+    }
+    if (!location) {
+      alert("Please select your nearest location.");
+      return;
+    }
+
+    // Redirect to serviceDetails.php with both values
+    const url = `serviceDetails.php?service=${encodeURIComponent(service)}&location=${encodeURIComponent(location)}`;
+    window.location.href = url;
+  });
+});
+

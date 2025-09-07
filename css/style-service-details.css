@@ -1,0 +1,29 @@
+    .details-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 56px;
+    }
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      font-weight:bold;
+      font-size: 24px; 
+      transform: translateY(-50%);
+      text-decoration: none;
+      padding: 14px 24px;
+    }
+    .service-title {
+      text-align: center;
+    }
+    .service-title h1 {
+      margin: 0;
+      font-size: clamp(20px, 3.6vw, 32px);
+    }
+    .service-title .sub {
+      margin-top: 4px;
+      font-size: clamp(14px, 2.8vw, 18px);
+      color: #555;
+    }

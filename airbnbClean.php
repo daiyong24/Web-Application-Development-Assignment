@@ -91,13 +91,13 @@
 <div class="moveInOutImg2">
   <div class="img-text-wrapper">
     <div class="img-box">
-      <img src="./images/officeCleaning-img.jpg" alt="Office Cleaning">
+      <img src="./images/airbnbCleaning-img.jpg" alt="House Cleaning">
     </div>
     <div class="move-paragraph">
            <p>
-              <strong>Office Cleaning</strong> -Our Office Cleaning service is designed to create a clean, hygienic, and professional workspace that supports productivity and well-being. We offer flexible cleaning schedules — daily, weekly, or custom —
-               to fit your company’s operations without disruption. From dusting, vacuuming, and sanitizing high-touch areas to deep cleaning carpets, restrooms, and workstations, our trained team ensures every corner is spotless. 
-               Whether you run a small office or a large corporate space, our tailored plans deliver consistency, reliability, and the highest standard of cleanliness to keep your workplace welcoming and efficient.
+              <strong>Airbnb Cleaning</strong> — Our Airbnb/short-stay cleaning is built for fast, reliable turnovers so every guest arrives to a spotless, photo-ready space. 
+              We align with your check-in/check-out times, swap and neatly stage fresh linens and towels, sanitize bathrooms and kitchen, vacuum/mop floors, wash dishes, empty bins, and reset bedrooms and living areas. We also restock essentials (toilet paper, toiletries, coffee/tea, dish soap) and tidy balconies/entrances for a great first impression. After each stay, we perform a quick damage/left-item check and can send time-stamped photos and notes. Add-ons include laundry service, deep clean after multiple stays, full inventory restock, and mid-stay refresh. 
+              Eco-friendly products available on request.
           </p>
     </div>
   </div>
@@ -105,7 +105,7 @@
 <br><br>
 <div class="office">
   <div class="Office-title">
-    <h2>Hire Basic Cleaning Services that You Need for Your Office</h2>
+    <h2>Hire Basic Cleaning Services that You Need for Airbnb</h2>
   </div>
 
   <div class="row">

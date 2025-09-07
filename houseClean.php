@@ -91,13 +91,14 @@
 <div class="moveInOutImg2">
   <div class="img-text-wrapper">
     <div class="img-box">
-      <img src="./images/officeCleaning-img.jpg" alt="Office Cleaning">
+      <img src="./images/houseCleaning-img.jpg" alt="House Cleaning">
     </div>
     <div class="move-paragraph">
            <p>
-              <strong>Office Cleaning</strong> -Our Office Cleaning service is designed to create a clean, hygienic, and professional workspace that supports productivity and well-being. We offer flexible cleaning schedules — daily, weekly, or custom —
-               to fit your company’s operations without disruption. From dusting, vacuuming, and sanitizing high-touch areas to deep cleaning carpets, restrooms, and workstations, our trained team ensures every corner is spotless. 
-               Whether you run a small office or a large corporate space, our tailored plans deliver consistency, reliability, and the highest standard of cleanliness to keep your workplace welcoming and efficient.
+              <strong>House Cleaning</strong> — Our House Cleaning service keeps your home fresh, healthy, and comfortable with flexible schedules (one-time, weekly, bi-weekly, or monthly). 
+              From dusting, vacuuming, and mopping floors to sanitizing kitchens and bathrooms, wiping surfaces, emptying bins, and making beds, our trained team follows a clear checklist for consistent results. 
+              Need more? Choose a deep-clean add-on for baseboards, grout, limescale, inside appliances/cabinets, and window tracks. We use professional tools and can provide eco-friendly products on 
+              request—delivering reliability, convenience, and great value for every home.
           </p>
     </div>
   </div>
@@ -105,7 +106,7 @@
 <br><br>
 <div class="office">
   <div class="Office-title">
-    <h2>Hire Basic Cleaning Services that You Need for Your Office</h2>
+    <h2>Hire Basic Cleaning Services that You Need for Your House</h2>
   </div>
 
   <div class="row">
