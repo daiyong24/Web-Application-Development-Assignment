@@ -1,3 +1,4 @@
+<link type="text/css" rel="stylesheet" href="css/style.css" />
 <!-- header start -->
 <header class="header js-header">
   <div class="container">
@@ -45,8 +46,8 @@
             </a>
             <ul class="sub-menu-1">
               <li><a href="profile.php">Edit Profile</a></li>
-              <li><a href="#">Booking History</a></li>
-              <li><a href="#">Translation History</a></li>
+              <li><a href="history.php">Booking History</a></li>
+              <li><a href="translation.php">Translation History</a></li>
               <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
