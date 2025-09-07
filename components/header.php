@@ -26,10 +26,10 @@
             SERVICE INQUIRIES <ion-icon name="caret-down-outline"></ion-icon>
           </a>
           <ul class="sub-menu-1">
-            <li><a href="#office-cleaning">Office Cleaning</a></li>
-            <li><a href="#house-cleaning">House Cleaning</a></li>
+            <li><a href="officeClean.php">Office Cleaning</a></li>
+            <li><a href="houseClean.php">House Cleaning</a></li>
             <li><a href="moveInOut.php">Move In / Move Out</a></li>
-            <li><a href="#airbnb-cleaning">Airbnb Cleaning</a></li>
+            <li><a href="airbnbClean.php">Airbnb Cleaning</a></li>
           </ul>
         </li>
 
