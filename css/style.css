@@ -1022,15 +1022,15 @@ img{
 }
 .plans-row {
   display: flex;
-  flex-wrap: wrap;         /* allow wrapping on smaller screens */
-  gap: 20px;               /* spacing between boxes */
-  justify-content: center; /* center them in row */
+  flex-wrap: wrap;        
+  gap: 20px;               
+  justify-content: center; 
 }
 
 .package_div {
-  flex: 1 1 250px;         /* grow/shrink, min width 250px */
-  max-width: 300px;        /* optional: cap width */
-  margin: 0 auto;          /* keep them balanced */
+  flex: 1 1 250px;         
+  max-width: 300px;        
+  margin: 0 auto;          
 }
 
 .info-box {
@@ -1068,3 +1068,104 @@ img{
   color: #67c7ff; 
   font-weight: bold;
 }
+
+.office { 
+    max-width: 1200px;
+     margin: 32px auto; 
+     padding: 30px 30px; 
+     background: #67c7ff;
+     border-radius: 20px;
+    }
+.Office-title h2 { 
+    text-align:center; 
+    margin: 0 0 18px; 
+    font-size: 50px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  align-items: end;              
+}
+
+
+.form-group { display: flex; flex-direction: column; }
+
+
+.form-group label {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0 0 8px;
+  color: #000;
+}
+
+
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 18px;
+  height:52px;
+  border: 1px solid #A8DFFA;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.form-group select:focus {
+  border-color:#A8DFFA;
+  box-shadow: 0 0 0 3px rgba(0, 132, 150, 0.15);
+  outline: none;
+}
+
+
+@media (max-width: 640px) {
+  .row.two-cols { grid-template-columns: 1fr; row-gap: 16px; }
+}
+
+
+
+.center-text-title {
+  text-align: center;
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;   
+  color: #0f0f0f;
+}
+
+
+.center-text-sub {
+  text-align: center;
+  margin: 0;                   
+  color: #6c7a89;             
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 500;
+}
+
+
+.title_div {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0;          
+}
+
+
+.title_divider {
+  display: block;
+  width: 220px;                
+  height: 4px;
+  border-radius: 4px;
+  margin-top: 12px;
+  background: #A8DFFA;
+}
+
+
+.title_divider.fade {
+  background: linear-gradient(90deg, transparent 0 10%, #ef7d79 10% 90%, transparent 90% 100%);
+}
+
+
+

@@ -9,57 +9,7 @@
   <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
 </head>
 <body>
-  <!-- header start -->
-  <header class="header js-header">
-    <div class="container">
-      <div class="logo">
-        <a href="index.html">Shine <span>& Sparkle</span></a>
-      </div>
-      <button type="button" class="nav-toggler js-nav-toggler">
-        <span></span>
-      </button>
-      <nav class="nav js-nav">
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropbtn">
-                INFO <ion-icon name="caret-down-outline"></ion-icon>
-              </a>  
-              <ul class="sub-menu-1">
-                  <li><a href="aboutus.php">About Us</a></li>
-                  <li><a href="contact.php">Contact Us</a></li>
-                  <li><a href="faq.php">FAQ</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropbtn"> 
-                SERVICE INQUIRIES <ion-icon name="caret-down-outline"></ion-icon> 
-              </a> 
-              <ul class="sub-menu-1"> 
-                <li><a href="#office-cleaning">Office Cleaning</a></li> 
-                <li><a href="#house-cleaning">House Cleaning</a></li> 
-                <li><a href="#move-in-out">Move In / Move Out</a></li> 
-                <li><a href="#airbnb-cleaning">Airbnb Cleaning</a></li> 
-              </ul> 
-            </li>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropbtn">
-                <ion-icon name="person-circle-outline"></ion-icon>
-                PROFILE <ion-icon name="caret-down-outline"></ion-icon>  
-              </a>
-              <ul class="sub-menu-1">
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="#">Booking History</a></li>
-                <li><a href="#">Translation History</a></li>
-              </ul>
-            </li>
-            <li><a href="#wallet">WALLET</a></li>
-            <li><button class="btnLogin-popup">Login</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <!-- header end -->
+<?php include 'components/header.php'; ?>
 
         <div class="moveInOutImg">
           <div class="img-box">
@@ -82,7 +32,7 @@
     </div>
   </div>
 </div>
-
+<br><br>
 <div class="plans-row">
         <div class="package_div">
 					<header class="cd-pricing-header">
@@ -194,7 +144,7 @@
   <ul>
     <li>Add house, office, deep, move-in/out, or post-renovation cleaning</li>
     <li>Ensure no unboxing or construction during cleaning</li>
-    <li>Book faster via WhatsApp: <a href="https://api.whatsapp.com/send?phone=60125671318">+6012-5671318</a></li>
+    <li>Book faster via WhatsApp: <a href="https://api.whatsapp.com/send?phone=6012-345678">+6012-345678</a></li>
   </ul>
 </div>
 
