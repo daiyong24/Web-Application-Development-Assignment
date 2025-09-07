@@ -55,8 +55,6 @@
           <!-- If NOT logged in -->
           <li><a href="login.php">Login</a></li>
         <?php endif; ?>
-
-        <li><a href="#wallet">WALLET</a></li>
       </ul>
     </nav>
   </div>
