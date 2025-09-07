@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Shine & Sparkle </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
+</head>
+<body>
+
+<!-- page wrapper start -->
+<div class="page-wrapper">
+
+  <!-- header start -->
+  <?php include('components/header.php');?>
+  <!-- header end -->
+
+  <!-- home section start -->
+   <section class="home" id="home">
+    <div class="container">
+      <div class="grid">
+        <div class="home-text">
+          <h1>Need Cleaning Services ?</h1>
+          <p>Looking for reliable and affordable cleaning solutions?
+          Our professional team provides thorough home and office cleaning
+          tailored to your needs. From regular maintenance to deep cleaning,
+          we ensure a spotless space so you can enjoy comfort, convenience,
+          and peace of mind.</p>
+          <div class="btn-wrap">
+            <a href="#info" class="btn">know more</a>
+          </div>
+        </div> 
+        <div class="home-img">
+          <div class="circle-wrap">
+            <div class="circle"></div>
+          </div>
+          <img src="./images/home-img.png" alt="img">
+        </div>
+      </div>
+    </div>
+   </section>
+  <!-- home section end -->
+
+  <!-- service inquiries section start -->
+  <section class="service-inquiries section-padding" id="service-inquiries">
+    <div class="container">
+      <div class="section-title">
+        <span class="title">service inquiries</span>
+        <h2 class="sub-title">Our Cleaning Services</h2>
+      </div>
+      <div class="grid">
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="./images/houseCleaning-img.jpg" alt="house">
+          </div>
+          <h3>House Cleaning</h3>
+        </div>
+        <!-- service inquiries item end -->
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="./images/officeCleaning-img.jpg" alt="office">
+          </div>
+          <h3>Office Cleaning</h3>
+        </div>
+        <!-- service inquiries item end -->
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="./images/moveInmoveOut-img.jpg" alt="move">
+          </div>
+          <h3>Move In / Move Out</h3>
+        </div>
+        <!-- service inquiries item end -->
+        <!-- service inquiries item start -->
+        <div class="service-inquiries-item">
+          <div class="img-box">
+            <img src="./images/aribnbCleaning-img.jpg" alt="airbnb">
+          </div>
+          <h3>Airbnb Cleaning</h3>
+        </div>
+        <!-- service inquiries item end -->
+      </div>
+    </div>
+    <!-- book button -->
+    <div class="book-btn-wrapper">
+      <button class="book-btn">Book Now</button>
+    </div>
+  </section>
+  <!-- service inquiries section end-->
+
+  <!-- what we provided start -->
+  <section class="what-we-provided section-padding" id="provided">
+    <div class="container">
+      <div class="section-title">
+        <h2 class="section-heading">WHAT WE PROVIDED?</h2>
+      </div>
+
+      <!-- Slider -->
+      <div class="slider">
+        <!-- list items -->
+        <div class="list">
+          <!-- House Cleaning Start -->
+          <div class="provided-item active">
+            <img src="./images/houseCleaning1-img.png" alt="House Cleaning">
+            <div class="content">
+              <h3>House Cleaning</h3>
+              <p>
+                Our professional team provides thorough house cleaning services 
+                to keep your home sparkling and comfortable.
+              </p>
+            </div>
+          </div>
+          <!-- House Cleaning End -->
+
+          <!-- Office Cleaning Start -->
+          <div class="provided-item">
+            <img src="./images/officeCleaning1-img.webp" alt="Office Cleaning">
+            <div class="content">
+              <h3>Office Cleaning</h3>
+              <p>
+                We ensure your workspace stays fresh and hygienic, 
+                creating a productive environment for your staff.
+              </p>
+            </div>
+          </div>
+          <!-- Office Cleaning End -->
+
+          <!-- Move In/Out Cleaning Start -->
+          <div class="provided-item">
+            <img src="./images/moveInmoveOut1-img.jpg" alt="Move In/Out Cleaning">
+            <div class="content">
+              <h3>Move In / Move Out Cleaning</h3>
+              <p>
+                Moving is stressful enough – let us handle the deep cleaning 
+                so you can focus on settling into your new place.
+              </p>
+            </div>
+          </div>
+          <!-- Move In/Out Cleaning End -->
+
+          <!-- Airbnb Cleaning Start -->
+          <div class="provided-item">
+            <img src="./images/airbnbCleaning1-img.jpg" alt="Airbnb Cleaning">
+            <div class="content">
+              <h3>Airbnb Cleaning</h3>
+              <p>
+                Keep your Airbnb guests happy with our quick, reliable, 
+                and professional cleaning service between stays.
+              </p>
+            </div>
+          </div>
+          <!-- Airbnb Cleaning End -->
+        </div>
+        <!-- button arrows -->
+        <div class="arrows">
+          <button class="prev-slide">&#10094;</button>
+          <button class="next-slide">&#10095;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- what we provided end-->
+
+<!--  <div class="wrapper">
+        <span class="icon-close">
+          <ion-icon name="close"></ion-icon>
+        </span>
+
+        <div class="form-box login">
+          <h2>LOGIN</h2>
+          <form action="#"></form>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="mail"></ion-icon>
+              </span>
+              <input type="email" required></input>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="lock-closed"></ion-icon>
+              </span>
+              <input type="password" required></input>
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox">Remember me</label>
+              <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="login-register">
+              <p>Don't have an account? <a href="#"
+              class="register-link">Register</a></p>
+            </div>
+          </form>
+        </div>
+
+        <div class="form-box register">
+          <h2>REGISTRATION</h2>
+          <form action="#">
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="person"></ion-icon>
+              </span>
+              <input type="text" required></input>
+              <label>Username</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="mail"></ion-icon>
+              </span>
+              <input type="email" required></input>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon">
+                <ion-icon name="lock-closed"></ion-icon>
+              </span>
+              <input type="password" required></input>
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox">I agree to the terms & conditions</label>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <div class="login-register">
+              <p>Already have an account? <a href="#"
+              class="login-link">Login</a></p>
+            </div>
+          </form>
+        </div>
+  </div>
+-->
+  <!-- footer start -->
+  <footer class="footer">
+  <div class="container footer-container">
+
+    <!-- Follow Us -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li><a href="#"><ion-icon name="logo-facebook"></ion-icon> Facebook</a></li>
+        <li><a href="#"><ion-icon name="logo-instagram"></ion-icon> Instagram</a></li>
+        <li><a href="#"><ion-icon name="logo-twitter"></ion-icon> Twitter</a></li>
+        <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon> LinkedIn</a></li>
+      </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="aboutus.php">About Us</a></li>
+        <li><a href="#service-inquiries">Our Services</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
+        <li><a href="faq.php">FAQ</a></li>
+      </ul>
+    </div>
+
+    <!-- Find Us -->
+    <div class="footer-col">
+      <h3>Find Us</h3>
+      <p><ion-icon name="location-outline"></ion-icon>
+            <strong>Address:</strong> D4-35-8, No 8, Cleaning Street, 50800 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia
+      </p>
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127482.68785497975!2d101.6869895!3d3.1385058999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc362abd08e7d3%3A0x232e1ff540d86c99!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur!5e0!3m2!1sen!2smy!4v1756106719199!5m2!1sen!2smy"
+          width="600" heigh="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <br>
+      <p><ion-icon name="call-outline"></ion-icon>
+            <strong>Customer Care Line:</strong> +60 12-345 6789
+      </p>
+      <p><ion-icon name="time-outline"></ion-icon>
+            <strong>Operating Hours:</strong><br> Mon - Sat: 9:00 AM - 6:00 PM<br> Sun: Closed
+      </p>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Copyright 2025, Shine & Sparkle. All Rights Reserved.</p>
+  </div>
+  </footer>
+  <!-- footer end -->
+
+</div>
+<!-- page wrapper end -->
+
+<!-- style switcher start -->
+<div class="style-switcher js-style-switcher">
+  <button type="button" class="style-switcher-toggler js-style-switcher-toggler">
+    <i class="fas fa-cog"></i>
+  </button>
+  <div class="style-switcher-main">
+    <h2>style switcher</h2>
+    <div class="style-switcher-item">
+      <p>Theme Color</p>
+      <div class="theme-class">
+        <input type="range" min="0" max="360" class="hue-slider js-hue-slider">
+        <div class="hue">Hue: <span class="js-hue"></span></div>
+      </div>
+    </div>
+    <div class="style-switcher-item">
+      <label class="form-switch">
+        <span>Dark Mode</span>
+        <input type="checkbox" class="js-dark-mode">
+        <div class="box"></div>
+      </label>
+    </div>
+  </div>
+</div>
+<!-- style switcher end -->
+
+<script src="js/script.js"></script>
+<script src="js/style-switcher.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
