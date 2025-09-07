@@ -379,6 +379,8 @@ img{
 } 
 .sub-menu-1 li{ 
     padding: 6px 6px; 
+    margin: 0;
+    width: 100%;
 } 
 .sub-menu-1 li a{ 
     color: #162938; 
