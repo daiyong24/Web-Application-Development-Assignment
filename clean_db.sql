@@ -23,9 +23,9 @@ CREATE TABLE addresses (
 -- Services 
 CREATE TABLE services (
   id INT(100) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,  --e.g. AirBnb/ Office Cleaning, House Cleaning, Move in/Move out    
-  description VARCHAR(200) NOT NULL , -- e.g. Weekly Cleaning
-  price INT(10) NOT NULL, -- single price
+  name VARCHAR(100) NOT NULL,  /*e.g. AirBnb/ Office Cleaning, House Cleaning, Move in/Move out */  
+  description VARCHAR(200) NOT NULL , /*e.g. Weekly Cleaning*/
+  price INT(10) NOT NULL, /*single price*/
   PRIMARY KEY (id)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE bookings (
   user_id INT(100) NOT NULL,
   address_id INT(100) NOT NULL,
   service_id INT(100) NOT NULL,
-  schedule VARCHAR(50) NOT NULL,   -- e.g. "Weekly", "Monthly"
+  schedule VARCHAR(50) NOT NULL,   /*e.g. "Weekly", "Monthly"*/
   date DATE NOT NULL,
   payment_method VARCHAR(50) NOT NULL,
   total_price INT(10) NOT NULL,
@@ -44,3 +44,7 @@ CREATE TABLE bookings (
   FOREIGN KEY (address_id) REFERENCES addresses(id) ON DELETE CASCADE,
   FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 );
+
+ALTER TABLE users
+  ADD COLUMN updated_at TIMESTAMP NULL DEFAULT NULL
+  AFTER password;
