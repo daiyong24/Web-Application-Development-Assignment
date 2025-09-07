@@ -56,3 +56,10 @@
   <div class="loader">
     <img src="./images/loader.gif" alt="">
   </div>
+
+<script>
+setTimeout(function(){
+  var el = document.querySelector('.loader');
+  if (el) el.style.display = 'none';
+}, 3000);
+</script>

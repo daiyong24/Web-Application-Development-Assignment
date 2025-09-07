@@ -984,41 +984,85 @@ img{
 }
 
 .moveInOutImg2{
-    grid-column: span 3;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    padding: 15px;
+  text-align: left ;         
+  margin: 24px 0;
 }
+
+.moveInOutImg2 .img-text-wrapper{
+  display: flex;                       
+  align-items: center;                 
+  gap: 24px;                           
+}
+
 .moveInOutImg2 .img-box{
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    box-shadow: var(--shadow);
-    background-color: var(--bg-color);
-    padding: 8px;
-    overflow: hidden;
-    display: flex;
-    justify-content: left;
-    align-items: left;
-}
-.moveInOutImg2 .img-box img{
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-.moveInOutImg2 .img-box img{
-    transform: scale(1.2);
-}
-.moveInOutImg2 h3{
-    text-transform: capitalize;
-    font-size: var(--fs-x1);
-    font-weight: 500;
+  flex: 0 0 200px;                     
+  width: 250px;
+  height: 250px;
+  border-radius: 12px;                
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0,0,0,.1);
+  background: #fff;
+  padding: 0;                          
+  display: block;                       
 }
 
+.moveInOutImg2 .img-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                    
+  display: block;
+}
 
+.moveInOutImg2 .move-paragraph{
+  flex: 1 1 auto;                       
+  font-size: 16px;
+  line-height: 1.7;
+}
+.plans-row {
+  display: flex;
+  flex-wrap: wrap;         /* allow wrapping on smaller screens */
+  gap: 20px;               /* spacing between boxes */
+  justify-content: center; /* center them in row */
+}
+
+.package_div {
+  flex: 1 1 250px;         /* grow/shrink, min width 250px */
+  max-width: 300px;        /* optional: cap width */
+  margin: 0 auto;          /* keep them balanced */
+}
+
+.info-box {
+  background: #A8DFFA;
+  padding: 15px 20px;
+  max-width: 1500px;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box li {
+  margin: 6px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.info-box li::before {
+  content: "• ";
+  color: #67c7ff; 
+  font-weight: bold;
+}
