@@ -48,7 +48,7 @@
 						<li>Apartment / Studio<br>(Suitable for 600 - 800 sqft)</li>
 					</ul>
 					<footer class="cd-pricing-footer">
-						<a class="cd-select main-bg-top" ton="2" href="#package">Book Now</a>
+						<a class="cd-select main-bg-top" ton="2" href="serviceDetails-moveInOut.php?step=1&plan=A">Book Now</a>
 					</footer>
 				</div>
 
@@ -66,7 +66,7 @@
 						<li>Apartment / Condominium<br>(Suitable for 600 - 1200 sqft)</li>
 					</ul>
 					<footer class="cd-pricing-footer">
-						<a class="cd-select main-bg-top" ton="2" href="#package">Book Now</a>
+						<a class="cd-select main-bg-top" ton="2" href="serviceDetails-moveInOut.php?step=1&plan=B">Book Now</a>
 					</footer>
 				</div>
 
@@ -85,7 +85,7 @@
 						<li>Condominium / Single Terrace<br>(Suitable for 1200 - 1600 sqft)</li>
 					</ul>
 					<footer class="cd-pricing-footer">
-						<a class="cd-select main-bg-top" ton="2" href="#package">Book Now</a>
+						<a class="cd-select main-bg-top" ton="2" href="serviceDetails-moveInOut.php?step=1&plan=C">Book Now</a>
 					</footer>
 				</div>
 
@@ -104,7 +104,7 @@
 						<li>Single Terrace / Bungalow<br>(Suitable for 1800 sqft above)</li>
 					</ul>
 					<footer class="cd-pricing-footer">
-						<a class="cd-select main-bg-top" ton="2" href="#package">Book Now</a>
+						<a class="cd-select main-bg-top" ton="2" href="serviceDetails-moveInOut.php?step=1&plan=D">Book Now</a>
 					</footer>
 				</div>
 </div>

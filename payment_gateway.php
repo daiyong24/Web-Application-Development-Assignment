@@ -503,7 +503,7 @@
           <label for="terms-agree">By proceeding, you agree to the Terms and Conditions.</label>
         </div>
         
-        <form class="action-buttons" method="post" action="payment_return.php">
+        <form class="action-buttons" method="post" action="includes/payment_return.php">
           <button class="btn btn-proceed" type="submit" name="Status" value="1">
             <i class="fas fa-check-circle"></i> Proceed
           </button>
