@@ -29,7 +29,7 @@
           we ensure a spotless space so you can enjoy comfort, convenience,
           and peace of mind.</p>
           <div class="btn-wrap">
-            <a href="#info" class="btn">know more</a>
+            <a href="contact.php" class="btn">know more</a>
           </div>
         </div> 
         <div class="home-img">

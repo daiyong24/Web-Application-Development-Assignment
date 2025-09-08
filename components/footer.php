@@ -6,10 +6,10 @@
     <div class="footer-col">
       <h3>Follow Us</h3>
       <ul class="social-links">
-        <li><a href="#"><ion-icon name="logo-facebook"></ion-icon> Facebook</a></li>
-        <li><a href="#"><ion-icon name="logo-instagram"></ion-icon> Instagram</a></li>
-        <li><a href="#"><ion-icon name="logo-twitter"></ion-icon> Twitter</a></li>
-        <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon> LinkedIn</a></li>
+        <li><a href="https://www.facebook.com/jeremy.ling.665085"><ion-icon name="logo-facebook"></ion-icon> Facebook</a></li>
+        <li><a href="https://www.instagram.com/smokyjamm"><ion-icon name="logo-instagram"></ion-icon> Instagram</a></li>
+        <li><a href="https://x.com/elonmusk"><ion-icon name="logo-twitter"></ion-icon> Twitter</a></li>
+        <li><a href="https://www.linkedin.com/company/utar/"><ion-icon name="logo-linkedin"></ion-icon> LinkedIn</a></li>
       </ul>
     </div>
 
