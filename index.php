@@ -78,7 +78,7 @@
         <!-- service inquiries item start -->
         <div class="service-inquiries-item">
           <div class="img-box">
-            <img src="./images/aribnbCleaning-img.jpg" alt="airbnb">
+            <img src="./images/airbnbCleaning-img.jpg" alt="airbnb">
           </div>
           <h3>Airbnb Cleaning</h3>
         </div>
