@@ -29,9 +29,9 @@
         gap: 30px;
     }
  .team-member img{
-        width: 500px;
+        width: 200px;
         height: 300px;
-        object-fit: cover;
+        object-fit: auto;
         border-radius: 50px;
      box-shadow: 0 4px 10px black;
 }

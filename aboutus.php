@@ -34,7 +34,7 @@
     <h2>Meet our team</h2>
     <div class="team-container">
         <div class="team-member">
-            <img src="download.jpg" alt="Team member 1"><hr>
+            <img src="images/member1.jpg" alt="Team member 1"><hr>
                 <div class="member-info">
                 <h3>Tom (Founder & CEO)</h3>
                 <p>Tom founded Shine & Sparkle with the dedication of making eco-friendly cleaning  
@@ -43,7 +43,7 @@
                 </div>
         </div>
         <div class="team-member">
-            <img src="business-office-services-alt-commercial-cleaning.jpg" alt="Team member 2"><hr>
+            <img src="images/member2.jpg" alt="Team member 2"><hr>
                 <div class="member-info">
                 <h3>Jerry (Operations Manager)</h3>
                 <p>Jerry oversees day-to-day operations, ensuring every cleaning project runs 
@@ -52,7 +52,7 @@
                 </div>
         </div>
         <div class="team-member">
-            <img src="business-office-services-alt-commercial-cleaning.jpg" alt="Team member 3"><hr>
+            <img src="images/member3.jpg" alt="Team member 3"><hr>
                 <div class="member-info">
                 <h3>Sarah (Customer Service Leader)</h3>
                 <p>Sarah represents the friendly voice of Shine & Sparkle, always ready to 

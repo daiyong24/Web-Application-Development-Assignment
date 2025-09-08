@@ -27,22 +27,22 @@
     <div class="grid">
 
       <div class="contact-number">
-        <img src="business-office-services-alt-commercial-cleaning.jpg" alt="Office Cleaning">
+        <img src="images/officeCleaning-img.jpg" alt="Office Cleaning">
         <span>012-0120120</span>
       </div>
 
       <div class="contact-number">
-        <img src="business-office-services-alt-commercial-cleaning.jpg" alt="House Cleaning">
+        <img src="images/houseCleaning-img.jpg" alt="House Cleaning">
         <span>012-3456789</span>
       </div>
 
       <div class="contact-number">
-        <img src="business-office-services-alt-commercial-cleaning.jpg" alt="Move In/Out">
+        <img src="images/moveInmoveOut-img.jpg" alt="Move In/Out">
         <span>012-6789012</span>
       </div>
 
       <div class="contact-number">
-        <img src="business-office-services-alt-commercial-cleaning.jpg" alt="Airbnb Cleaning">
+        <img src="images/airbnbCleaning1-img.jpg" alt="Airbnb Cleaning">
         <span>012-9012345</span>
       </div>
 
