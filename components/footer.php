@@ -17,10 +17,10 @@
     <div class="footer-col">
       <h3>Quick Links</h3>
       <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#service-inquiries">Our Services</a></li>
-        <li><a href="#contact">Contact Us</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="aboutus.php">About Us</a></li>
+        <li><a href="index.php#service-inquiries">Our Services</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
+        <li><a href="faq.php">FAQ</a></li>
       </ul>
     </div>
 
