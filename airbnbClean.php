@@ -192,6 +192,80 @@ session_start();
 
   <button class="ss-btn next" aria-label="Next">›</button>
 </section>
+
+<!-- what we provided start -->
+  <section class="what-we-provided section-padding" id="provided">
+    <div class="container">
+      <div class="section-title">
+        <h2 class="section-heading">WHAT WE PROVIDED?</h2>
+      </div>
+
+      <!-- Slider -->
+      <div class="slider">
+        <!-- list items -->
+        <div class="list">
+          <!-- House Cleaning Start -->
+          <div class="provided-item active">
+            <img src="./images/houseCleaning1-img.png" alt="House Cleaning">
+            <div class="content">
+              <h3>House Cleaning</h3>
+              <p>
+                Our professional team provides thorough house cleaning services 
+                to keep your home sparkling and comfortable.
+              </p>
+            </div>
+          </div>
+          <!-- House Cleaning End -->
+
+          <!-- Office Cleaning Start -->
+          <div class="provided-item">
+            <img src="./images/officeCleaning1-img.webp" alt="Office Cleaning">
+            <div class="content">
+              <h3>Office Cleaning</h3>
+              <p>
+                We ensure your workspace stays fresh and hygienic, 
+                creating a productive environment for your staff.
+              </p>
+            </div>
+          </div>
+          <!-- Office Cleaning End -->
+
+          <!-- Move In/Out Cleaning Start -->
+          <div class="provided-item">
+            <img src="./images/moveInmoveOut1-img.jpg" alt="Move In/Out Cleaning">
+            <div class="content">
+              <h3>Move In / Move Out Cleaning</h3>
+              <p>
+                Moving is stressful enough – let us handle the deep cleaning 
+                so you can focus on settling into your new place.
+              </p>
+            </div>
+          </div>
+          <!-- Move In/Out Cleaning End -->
+
+          <!-- Airbnb Cleaning Start -->
+          <div class="provided-item">
+            <img src="./images/airbnbCleaning1-img.jpg" alt="Airbnb Cleaning">
+            <div class="content">
+              <h3>Airbnb Cleaning</h3>
+              <p>
+                Keep your Airbnb guests happy with our quick, reliable, 
+                and professional cleaning service between stays.
+              </p>
+            </div>
+          </div>
+          <!-- Airbnb Cleaning End -->
+        </div>
+        <!-- button arrows -->
+        <div class="arrows">
+          <button class="prev-slide">&#10094;</button>
+          <button class="next-slide">&#10095;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- what we provided end-->
+
 <script>
   
   (function () {

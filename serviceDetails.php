@@ -1,56 +1,20 @@
 <?php
-// serviceDetails.php
-session_start();
+// serviceDetails.php (refactored to remove redundancy & logic mismatch)
 
-/**
- * ---- LOGIN ENFORCEMENT ----
- * Requires your login flow to set: $_SESSION['user_id'], $_SESSION['user_name']
- */
-if (!isset($_SESSION['user_id'])) {
-    $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-    header('Location: login.php');
-    exit;
-}
+require_once __DIR__ . '/includes/auth.php'; // starts session + enforces login
+require_once __DIR__ . '/includes/db.php';   // provides $pdo (PDO connection)
+if (!isset($_SESSION['user_id'])) { header('Location: login.php'); exit; }
+$userId = (int)$_SESSION['user_id'];
 
-/**
- * ---- CONFIG (adjust to your DB) ----
- */
-$DB_HOST = 'localhost';
-$DB_NAME = 'cleaning_db';
-$DB_USER = 'root';
-$DB_PASS = ''; // change if needed
-
-// Map slugs -> exact "services" table fields (name, description, price)
-$SERVICE_MAP = [
-  'house-cleaning'  => ['name' => 'House Cleaning',  'description' => 'Standard Cleaning', 'price' => 140],
-  'office-cleaning' => ['name' => 'Office Cleaning', 'description' => 'Standard Cleaning', 'price' => 250],
-  'airbnb-cleaning' => ['name' => 'AirBnb Cleaning', 'description' => 'Turnover Cleaning', 'price' => 160],
-];
-
-$LOCATION_MAP = [
-  'kuala-lumpur' => 'Kuala Lumpur',
-  'selangor'     => 'Selangor',
-];
-
-/**
- * ---- HELPERS ----
- */
+// --- Helpers (kept local; you can move to a helpers.php later)
+function h($s) { return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8'); }
+function is_post() { return $_SERVER['REQUEST_METHOD'] === 'POST'; }
 function slug_to_label($slug, $map, $fallback = '—') {
   return $map[$slug]['label'] ?? ($map[$slug] ?? $fallback);
 }
-
-function h($s) { return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8'); }
-
-function is_post() { return $_SERVER['REQUEST_METHOD'] === 'POST'; }
-
 function service_meta($slug, $map) {
   return $map[$slug] ?? ['name' => 'Cleaning Service', 'description' => 'Standard Cleaning', 'price' => 100];
 }
-
-/**
- * Create or fetch a service row to satisfy NOT NULL (name, description, price).
- * Returns service_id.
- */
 function ensure_service_id(PDO $pdo, $serviceMeta) {
   $stmt = $pdo->prepare("SELECT id FROM services WHERE name = ?");
   $stmt->execute([$serviceMeta['name']]);
@@ -61,10 +25,6 @@ function ensure_service_id(PDO $pdo, $serviceMeta) {
   $stmt->execute([$serviceMeta['name'], $serviceMeta['description'], (int)$serviceMeta['price']]);
   return (int)$pdo->lastInsertId();
 }
-
-/**
- * Pricing: use base price from service table meta; discount by schedule for total.
- */
 function calc_total_price($serviceSlug, $schedule, $SERVICE_MAP) {
   $meta = service_meta($serviceSlug, $SERVICE_MAP);
   $base = (int)$meta['price'];
@@ -74,16 +34,29 @@ function calc_total_price($serviceSlug, $schedule, $SERVICE_MAP) {
   return (int) round($base * $mult);
 }
 
-/**
- * ---- STEP ROUTER ----
- */
+// --- Static maps (you can move these to a config file later)
+$SERVICE_MAP = [
+  'house-cleaning'  => ['name' => 'House Cleaning',  'description' => 'Standard Cleaning', 'price' => 140],
+  'office-cleaning' => ['name' => 'Office Cleaning', 'description' => 'Standard Cleaning', 'price' => 250],
+  'airbnb-cleaning' => ['name' => 'AirBnb Cleaning', 'description' => 'Turnover Cleaning', 'price' => 160],
+];
+$LOCATION_MAP = [
+  'kuala-lumpur' => 'Kuala Lumpur',
+  'selangor'     => 'Selangor',
+];
+
+// --- Load logged-in account (for display; source of truth is user_id)
+$stmt = $pdo->prepare("SELECT id, name, email, number FROM users WHERE id = ?");
+$stmt->execute([$userId]);
+$account = $stmt->fetch() ?: ['name'=>'','email'=>'','number'=>''];
+
+// --- Step router
 $step = isset($_GET['step']) ? max(1, min(4, (int)$_GET['step'])) : 1;
 
-// Prefill from GET (comes from Book Now on previous page)
 if (isset($_GET['service']))  $_SESSION['booking']['service']  = $_GET['service'];
 if (isset($_GET['location'])) $_SESSION['booking']['location'] = $_GET['location'];
 
-// Handle step submissions
+// Handle steps
 if (is_post()) {
   if (isset($_POST['go_step2'])) {
     $_SESSION['booking']['service']  = $_POST['service'] ?? $_SESSION['booking']['service'] ?? '';
@@ -93,7 +66,6 @@ if (is_post()) {
 
   if (isset($_POST['go_step3'])) {
     $_SESSION['booking']['address_line1'] = $_POST['address_line1'] ?? '';
-    // City is derived from location; user sees it read-only
     $_SESSION['booking']['city']          = slug_to_label($_SESSION['booking']['location'] ?? '', $LOCATION_MAP, '');
     $_SESSION['booking']['postcode']      = $_POST['postcode'] ?? '';
     $_SESSION['booking']['schedule']      = $_POST['schedule'] ?? 'One-time';
@@ -102,9 +74,7 @@ if (is_post()) {
   }
 
   if (isset($_POST['go_step4'])) {
-    $_SESSION['booking']['name']   = $_POST['name'] ?? '';
-    $_SESSION['booking']['email']  = $_POST['email'] ?? '';
-    $_SESSION['booking']['number'] = $_POST['number'] ?? '';
+    $_SESSION['booking']['number']         = $_POST['number'] ?? '';
     $_SESSION['booking']['payment_method'] = $_POST['payment_method'] ?? 'Cash';
     header('Location: ?step=4'); exit;
   }
@@ -115,50 +85,35 @@ if (is_post()) {
     $schedule    = $b['schedule'] ?? 'One-time';
     $total_price = calc_total_price($serviceSlug, $schedule, $SERVICE_MAP);
 
-     if (($b['payment_method'] ?? 'Cash') === 'Online') {
-    // Save booking info for after payment
-    $_SESSION['pending_payment'] = [
-      'booking'     => $b,
-      'total_price' => $total_price
-    ];
-    header('Location: payment_gateway.php');
-    exit;
-  }
+    if (($b['payment_method'] ?? 'Cash') === 'Online') {
+      $_SESSION['pending_payment'] = [
+        'booking'     => $b,
+        'total_price' => $total_price
+      ];
+      header('Location: payment_gateway.php'); // your gateway handoff page
+      exit;
+    }
+
+    // Build address string per your schema (addresses.address_text)
+    $address_text = trim(
+      ($b['address_line1'] ?? '') .
+      ((isset($b['postcode']) && $b['postcode'] !== '') ? (', ' . $b['postcode']) : '') .
+      ((isset($b['city'])     && $b['city']     !== '') ? (' ' . $b['city'])     : '')
+    );
 
     try {
-      $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4", $DB_USER, $DB_PASS, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-      ]);
       $pdo->beginTransaction();
 
-      // 1) Upsert/Create user (by email)
-      $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-      $stmt->execute([$b['email']]);
-      $userId = $stmt->fetchColumn();
-
-      if (!$userId) {
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, number, password) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$b['name'], $b['email'], $b['number'], password_hash('changeme', PASSWORD_BCRYPT)]);
-        $userId = (int)$pdo->lastInsertId();
-      }
-
-      // 2) Address: your schema only has (user_id, address_text)
-      // Build a single string, e.g. "Line 1, Postcode City"
-      $address_text = trim(
-        ($b['address_line1'] ?? '') .
-        ((isset($b['postcode']) && $b['postcode'] !== '') ? (', ' . $b['postcode']) : '') .
-        ((isset($b['city'])     && $b['city']     !== '') ? (' ' . $b['city'])     : '')
-      );
-
+      // Address
       $stmt = $pdo->prepare("INSERT INTO addresses (user_id, address_text) VALUES (?, ?)");
       $stmt->execute([$userId, $address_text]);
       $addressId = (int)$pdo->lastInsertId();
 
-      // 3) Service: ensure exists (name, description, price NOT NULL)
+      // Service (ensure exists)
       $meta = service_meta($serviceSlug, $SERVICE_MAP);
       $serviceId = ensure_service_id($pdo, $meta);
 
-      // 4) Booking
+      // Booking (bind to logged-in user)
       $stmt = $pdo->prepare("
         INSERT INTO bookings (user_id, address_id, service_id, schedule, date, payment_method, total_price)
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -174,27 +129,23 @@ if (is_post()) {
       ]);
 
       $pdo->commit();
-      $created = true;
-    } catch (Exception $e) {
-      if (isset($pdo)) $pdo->rollBack();
-      $created = false;
-      $error = $e->getMessage();
-    }
 
-    if ($created) {
-      $receipt = $_SESSION['booking'];
+      // Success receipt
+      $receipt = $b;
       $receipt['total_price']  = $total_price;
       $receipt['address_text'] = $address_text;
       $_SESSION['booking'] = [];
       $_SESSION['receipt'] = $receipt;
       header('Location: ?success=1'); exit;
-    } else {
-      header('Location: ?step=4&error=' . urlencode($error)); exit;
+
+    } catch (Exception $e) {
+      if ($pdo->inTransaction()) $pdo->rollBack();
+      header('Location: ?step=4&error=' . urlencode($e->getMessage())); exit;
     }
   }
 }
 
-// Success page
+// --- Success page
 if (isset($_GET['success'])) {
   $r = $_SESSION['receipt'] ?? [];
   $service  = service_meta($r['service'] ?? '', $SERVICE_MAP)['name'] ?? '—';
@@ -210,13 +161,13 @@ if (isset($_GET['success'])) {
   <body>
     <div class="card success">
       <h1 class="title">Booking Confirmed</h1>
-      <div class="row"><strong>Service</strong><div><?=h($service)?></div></div>
-      <div class="row"><strong>Location</strong><div><?=h($location)?></div></div>
-      <div class="row"><strong>Address</strong><div><?=h($r['address_text'] ?? '')?></div></div>
-      <div class="row"><strong>Date</strong><div><?=h($r['date']??'')?></div></div>
-      <div class="row"><strong>Schedule</strong><div><?=h($r['schedule']??'')?></div></div>
-      <div class="row"><strong>Payment</strong><div><?=h($r['payment_method']??'')?></div></div>
-      <div class="row"><strong>Total</strong><div>RM <?=number_format((int)($r['total_price']??0), 2)?></div></div>
+      <div class="row"><strong>Service:</strong><div><?=h($service)?></div></div>
+      <div class="row"><strong>Location:</strong><div><?=h($location)?></div></div>
+      <div class="row"><strong>Address:</strong><div><?=h($r['address_text'] ?? '')?></div></div>
+      <div class="row"><strong>Date:</strong><div><?=h($r['date']??'')?></div></div>
+      <div class="row"><strong>Schedule:</strong><div><?=h($r['schedule']??'')?></div></div>
+      <div class="row"><strong>Payment:</strong><div><?=h($r['payment_method']??'')?></div></div>
+      <div class="row"><strong>Total:</strong><div>RM <?=number_format((int)($r['total_price']??0), 2)?></div></div>
       <a class="btn" href="index.php">Back to Home</a>
     </div>
   </body>
@@ -225,9 +176,7 @@ if (isset($_GET['success'])) {
   exit;
 }
 
-/**
- * ---- VIEW (Steps 1-4) ----
- */
+// --- View (Steps 1–4)
 $b = $_SESSION['booking'] ?? [];
 $serviceSlug   = $b['service']  ?? $_GET['service']  ?? '';
 $locationSlug  = $b['location'] ?? $_GET['location'] ?? '';
@@ -294,7 +243,7 @@ $progress = $progressByStep[$step] ?? 25;
           </div>
         </div>
         <div class="discount-banner">
-      <strong> Special Offers!</strong> Get 10% off on Weekly cleaning and 5% off on Monthly cleaning!
+          <strong> Special Offers!</strong> Get 10% off on Weekly cleaning and 5% off on Monthly cleaning!
         </div>
         <div class="actions">
           <button class="btn primary" name="go_step2" type="submit">Continue</button>
@@ -341,16 +290,16 @@ $progress = $progressByStep[$step] ?? 25;
       <form method="post" class="card">
         <div class="row">
           <div>
-            <label for="name">Your Name</label>
-            <input id="name" name="name" required value="<?=h($b['name'] ?? '')?>">
+            <label>Your Name (Account)</label>
+            <input value="<?=h($account['name'])?>" readonly>
           </div>
           <div>
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" required value="<?=h($b['email'] ?? '')?>">
+            <label>Email (Account)</label>
+            <input type="email" value="<?=h($account['email'])?>" readonly>
           </div>
           <div>
-            <label for="number">Phone Number</label>
-            <input id="number" name="number" required value="<?=h($b['number'] ?? '')?>">
+            <label for="number">Phone Number (Contact)</label>
+            <input id="number" name="number" value="<?=h($b['number'] ?? $account['number'] ?? '')?>">
           </div>
           <div>
             <label for="payment_method">Payment Method</label>
@@ -379,20 +328,20 @@ $progress = $progressByStep[$step] ?? 25;
         <h3 class="review-title">Review your booking</h3>
         <?php if ($err): ?><p class="error">Error: <?=h($err)?></p><?php endif; ?>
         <div class="summary">
-          <strong>Service</strong><div><?=h($service)?></div>
-          <strong>Location</strong><div><?=h($location)?></div>
-          <strong>Date</strong><div><?=h($b['date'] ?? '')?></div>
-          <strong>Schedule</strong><div><?=h($b['schedule'] ?? '')?></div>
-          <strong>Address</strong>
+          <strong>Service     :</strong><div><?=h($service)?></div>
+          <strong>Location    :</strong><div><?=h($location)?></div>
+          <strong>Date        :</strong><div><?=h($b['date'] ?? '')?></div>
+          <strong>Schedule    :</strong><div><?=h($b['schedule'] ?? '')?></div>
+          <strong>Address     :</strong>
           <div class="muted">
             <?=h($b['address_line1'] ?? '')?><br>
             <?=h($b['postcode'] ?? '')?> <?=h($b['city'] ?? '')?>
           </div>
-          <strong>Name</strong><div><?=h($b['name'] ?? '')?></div>
-          <strong>Email</strong><div><?=h($b['email'] ?? '')?></div>
-          <strong>Phone</strong><div><?=h($b['number'] ?? '')?></div>
-          <strong>Payment</strong><div><?=h($b['payment_method'] ?? '')?></div>
-          <strong>Estimated Total</strong><div>RM <?=number_format($estimate, 2)?></div>
+          <strong>Name (Account)     :</strong><div><?=h($account['name'])?></div>
+          <strong>Email (Account)     :</strong><div><?=h($account['email'])?></div>
+          <strong>Phone     :</strong><div><?=h($b['number'] ?? $account['number'] ?? '')?></div>
+          <strong>Payment     :</strong><div><?=h($b['payment_method'] ?? '')?></div>
+          <strong>Estimated Total     :</strong><div>RM <?=number_format($estimate, 2)?></div>
         </div>
         <form method="post" class="actions">
           <a class="btn" href="?step=3">Back</a>
