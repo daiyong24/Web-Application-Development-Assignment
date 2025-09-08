@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +82,7 @@
     }
   </style>
 </head>
-<body>
+<body data-user-id="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0 ?>">
 <?php include 'components/header.php'; ?>
 
         <div class="moveInOutImg">
@@ -214,6 +218,8 @@
     track.addEventListener('scroll', updateArrows);
     window.addEventListener('load', updateArrows);
   })();
+
+    window.LOGGED_IN = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
 </script>
 
 

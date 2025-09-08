@@ -114,24 +114,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookBtn = document.querySelector(".book-btn");
   if (!bookBtn) return;
 
+  // Read user id from body attribute
+  const userId = parseInt(document.body?.dataset?.userId || "0", 10);
+  const LOGGED_IN = userId > 0;
+
+  const serviceEl  = document.querySelector("#service");
+  const locationEl = document.querySelector("#location");
+
   bookBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const service = document.querySelector("#service")?.value;
-    const location = document.querySelector("#location")?.value;
+    const service  = serviceEl?.value.trim();
+    const location = locationEl?.value.trim();
 
     if (!service) {
       alert("Please select a service first.");
+      serviceEl?.focus();
       return;
     }
     if (!location) {
       alert("Please select your nearest location.");
+      locationEl?.focus();
       return;
     }
 
-    // Redirect to serviceDetails.php with both values
-    const url = `serviceDetails.php?service=${encodeURIComponent(service)}&location=${encodeURIComponent(location)}`;
-    window.location.href = url;
+    const target = `serviceDetails.php?service=${encodeURIComponent(service)}&location=${encodeURIComponent(location)}`;
+
+    if (!LOGGED_IN) {
+      try { sessionStorage.setItem("afterLoginTarget", target); } catch (_) {}
+      window.location.href = "login.php";
+      return;
+    }
+
+    window.location.href = target;
   });
+
 });
 

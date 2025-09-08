@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +82,7 @@
     }
   </style>
 </head>
-<body>
+<body data-user-id="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0 ?>">
 <?php include 'components/header.php'; ?>
 
         <div class="moveInOutImg">
@@ -221,6 +225,7 @@
 
 <script src="js/script.js"></script>
 <script src="js/style-switcher.js"></script>
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <?php include 'components/footer.php'; ?>
