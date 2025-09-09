@@ -26,7 +26,7 @@
         <th>Receipt/Cancellation No</th>
         <th>Description</th>
         <th>Amount</th>
-        <th>Created At</th>
+        <th>Booking Date</th>
       </tr>
     </thead>
     <tbody>
