@@ -1,3 +1,41 @@
+<?php
+session_start();
+require_once 'includes/db.php'; // Make sure this path is correct
+
+$success = '';
+$error = '';
+
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
+    $name = trim($_POST['name']);
+    $contact = trim($_POST['contact']);
+    $email = trim($_POST['email']);
+    $purpose = trim($_POST['purpose']);
+    $message = trim($_POST['message']);
+    
+    // Basic validation
+    if (empty($name) || empty($contact) || empty($email) || empty($purpose) || empty($message)) {
+        $error = "All fields are required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Please enter a valid email address.";
+    } else {
+        try {
+            // Insert into database
+            $stmt = $pdo->prepare("INSERT INTO contact_messages (name, contact_number, email, purpose, message) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$name, $contact, $email, $purpose, $message]);
+            
+            $success = "Your message has been sent successfully! We'll get back to you soon.";
+            
+            // Clear form fields
+            $_POST = array();
+            
+        } catch (PDOException $e) {
+            $error = "Sorry, there was an error sending your message. Please try again later.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +46,24 @@
   <link type="text/css" rel="stylesheet" href="css/style.css" />
   <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
   <link type="text/css" rel="stylesheet" href="css/style-inform.css" />
+  <style>
+    .alert {
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
 </head>
 <body>
 
@@ -57,25 +113,35 @@
             <div class="section-title">
                 <h2 class="sub-title"><u>GET IN TOUCH</u></h2>
             </div>
+            
+            <?php if ($success): ?>
+                <div class="alert alert-success"><?php echo $success; ?></div>
+            <?php endif; ?>
+            
+            <?php if ($error): ?>
+                <div class="alert alert-error"><?php echo $error; ?></div>
+            <?php endif; ?>
+            
             <h2 style="text-align: center; margin-bottom: 30px;">We are looking forward to helping you with enquiries.</h2>
             <div class="contact-form">
-                <form>
+                <form method="post" action="">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>" required>
 
                     <label for="contact">Contact Number</label>
-                    <input type="tel" name="contact" id="contact">
+                    <input type="tel" name="contact" id="contact" value="<?php echo isset($_POST['contact']) ? htmlspecialchars($_POST['contact']) : ''; ?>" required>
 
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
 
                     <label for="purpose">Purpose of Inquiry</label>
-                    <input type="text" name="purpose" id="purpose">
+                    <input type="text" name="purpose" id="purpose" value="<?php echo isset($_POST['purpose']) ? htmlspecialchars($_POST['purpose']) : ''; ?>" required>
 
-                    <label for="special">Special Request</label>
-                    <textarea id="special" rows="4"></textarea>
+                    <label for="message">Special Request</label>
+                    <textarea id="message" name="message" rows="4" required><?php echo isset($_POST['message']) ? htmlspecialchars($_POST['message']) : ''; ?></textarea>
+                    
+                    <button type="submit" name="submit_contact">Send Form Details</button>
                 </form>
-                <button type="button" onclick="alert('Your form details has been sent!')">Send Form Details</button>
             </div>
     
     </section>
@@ -150,8 +216,6 @@
           </form>
         </div>
   </div>
-
-
 
 <script src="js/script.js"></script>
 <script src="js/style-switcher.js"></script>

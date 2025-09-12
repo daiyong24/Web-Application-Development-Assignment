@@ -25,6 +25,7 @@
   <div>🧹 <strong>Admin</strong></div>
   <nav>
     <a href="dashboard.php">Dashboard</a>
+    <a href="contact_messages.php">Contact</a>
     <a href="bookings.php">Bookings</a>
     <a href="users.php">Users</a>
     <a href="profile.php">Profile</a>
