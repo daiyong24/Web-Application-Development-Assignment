@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/includes/auth.php'; // starts session + enforces login
-require_once __DIR__ . '/includes/db.php';   // provides $pdo (PDO connection)
+require_once __DIR__ . '/includes/auth.php'; 
+require_once __DIR__ . '/includes/db.php';   
 
 // serviceDetails-move.php  —  Move In / Move Out booking wizard
 if (session_status() === PHP_SESSION_NONE) session_start();
@@ -64,7 +64,6 @@ function build_move_address_text(array $m): string {
 /* --- Step control --- */
 $step = isset($_GET['step']) ? max(1, min(4, (int)$_GET['step'])) : 1;
 
-/* --- Prefill from query (coming from moveInOut.php) --- */
 if (isset($_GET['service'])) $_SESSION['move']['service'] = $_GET['service']; // should be 'move-in-out'
 if (isset($_GET['plan']))    $_SESSION['move']['plan']    = strtoupper($_GET['plan']);
 
@@ -93,11 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Step 3 -> 4 (your details)
   if (isset($_POST['go_step4'])) {
-  // Always trust the logged-in account, not the form fields
   $_SESSION['move']['name']   = $currentUser['name']  ?? '';
   $_SESSION['move']['email']  = $currentUser['email'] ?? '';
 
-  // Phone can be editable; if left blank, fall back to account phone
   $postedNumber = trim($_POST['number'] ?? '');
   $_SESSION['move']['number'] = $postedNumber !== '' ? $postedNumber : ($currentUser['number'] ?? '');
 
@@ -138,14 +135,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'schedule'     => $schedule,
     ];
 
-    // Make absolutely sure session data is flushed before redirect
     session_write_close();
 
-    // If payment_gateway.php sits in the SAME folder as this file:
     header('Location: payment_gateway.php');
     exit;
-    // If it's in a subfolder (e.g. /checkout/payment_gateway.php), use that path instead:
-    // header('Location: checkout/payment_gateway.php'); exit;
+    
   }
 
   // ---- 2) CASH → create booking immediately
@@ -218,7 +212,7 @@ if (isset($_GET['success'])) {
   ?>
   <!doctype html><html lang="en"><head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Move Booking Confirmed</title>
+    <title>Move Booking Confirmed - Shine & Sparkle</title>
     <link rel="stylesheet" href="css/style-service-details.css">
   </head><body>
     <div class="card success">
@@ -234,7 +228,10 @@ if (isset($_GET['success'])) {
       <a class="btn" href="index.php">Back to Home</a>
     </div>
   </body></html>
-  <?php exit;
+  <?php 
+  // Clear the receipt after displaying
+  unset($_SESSION['move_receipt']);
+  exit;
 }
 
 /* --- View (Steps) --- */
@@ -256,7 +253,7 @@ $progress = [1=>25,2=>50,3=>75,4=>100][$step];
     <a class="back-btn" href="javascript:history.back()">← Back</a>
     <div class="service-title">
       <h1>Move In / Move Out</h1>
-      <div class="sub">Plan <?=h($plan)?> — RM <?=number_format($price,2)?></div>
+      <div class="sub" id="plan-display">Plan <?=h($plan)?> — RM <?=number_format($price,2)?></div>
     </div>
   </header>
 
@@ -279,7 +276,7 @@ $progress = [1=>25,2=>50,3=>75,4=>100][$step];
         <div class="row">
           <div>
             <label for="plan">Selected Plan</label>
-            <select id="plan" name="plan" required>
+            <select id="plan" name="plan" required onchange="updatePlanDisplay()">
               <?php foreach ($PLAN_PRICES as $p => $amt): ?>
                 <option value="<?=$p?>" <?=$plan===$p?'selected':''?>>Plan <?=$p?> — RM <?=number_format($amt,2)?></option>
               <?php endforeach; ?>
@@ -411,5 +408,24 @@ $progress = [1=>25,2=>50,3=>75,4=>100][$step];
     <?php endif; ?>
 
   </div>
+  
+  <?php if ($step === 1): ?>
+  <script>
+  function updatePlanDisplay() {
+    const planSelect = document.getElementById('plan');
+    const planDisplay = document.getElementById('plan-display');
+    const selectedOption = planSelect.options[planSelect.selectedIndex];
+    
+    // Update the header with the selected plan
+    planDisplay.textContent = selectedOption.textContent;
+  }
+  
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set up the change event listener
+    document.getElementById('plan').addEventListener('change', updatePlanDisplay);
+  });
+  </script>
+  <?php endif; ?>
 </body>
 </html>

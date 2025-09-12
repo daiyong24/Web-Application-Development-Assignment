@@ -1,6 +1,7 @@
 :root {
   --accent: #3B82F6;       /* primary blue */
   --accent-light: #A8DFFA; /* your light blue */
+  --success: #10B981;      /* green for success messages */
   --surface: #ffffff;
   --ink: #111;
   --muted: #6b7280;
@@ -229,17 +230,71 @@ input[readonly] {
 
 /* ============ Success ============ */
 .card.success {
-  max-width: 760px;
-  margin: 28px auto;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  animation: fadeIn 0.5s ease-out;
 }
-.title { font-size: 24px; margin: 0 0 12px; }
 
-/* ============ Micro-interactions ============ */
-input, select {
-  will-change: transform;
+.card.success .title {
+  color: var(--success);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
 }
-input:active, select:active {
-  transform: scale(.998);
+
+.card.success .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.card.success .row strong {
+  text-align: left;
+  color: #333;
+}
+
+.card.success .row div {
+  text-align: right;
+  color: #666;
+}
+
+.card.success .btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: var(--success);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.3s;
+  border: none;
+}
+
+.card.success .btn:hover {
+  background: #0da271;
+}
+
+/* Animation for success page */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Success icon */
+.card.success::before {
+  content: "✓";
+  display: block;
+  font-size: 4rem;
+  color: var(--success);
+  margin-bottom: 1rem;
 }
 
 /* Center the single action button on the success card */
@@ -248,7 +303,6 @@ input:active, select:active {
   width: max-content;   /* keeps button as tight as its text */
   margin: 16px auto 0;  /* centers horizontally */
 }
-
 
 /* Discount banner style */
 .discount-banner {
@@ -261,10 +315,10 @@ input:active, select:active {
   font-size: 0.9rem;
 }
 
-.card.success .title{
-  text-align: center;
-  color:#2563eb,
+/* ============ Micro-interactions ============ */
+input, select {
+  will-change: transform;
 }
-
-
-
+input:active, select:active {
+  transform: scale(.998);
+}
