@@ -7,27 +7,49 @@ $err = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = trim($_POST['email'] ?? '');
   $pass  = $_POST['password'] ?? '';
+  $login_as = strtolower(trim($_POST['login_as'] ?? 'user'));
 
   if ($email === '' || $pass === '') {
     $err = 'Please enter both email and password.';
   } else {
-    $stmt = $pdo->prepare("SELECT id, name, email, number, password FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $u = $stmt->fetch();
-    if (!$u || !password_verify($pass, $u['password'])) {
-      $err = 'Invalid email or password.';
+    if ($login_as === 'admin') {
+      //  Admin login
+      try {
+        $stmt = $pdo->prepare("SELECT id, name, email, role, password FROM admins WHERE email = ? LIMIT 1");
+        $stmt->execute([$email]);
+        $adm = $stmt->fetch();
+        if (!$adm || !password_verify($pass, $adm['password'])) {
+          $err = 'Invalid admin email or password.';
+        } else {
+          $_SESSION['admin_id'] = $adm['id'];
+          $_SESSION['admin_name'] = $adm['name'];
+          header('Location: admin/dashboard.php');
+          exit;
+        }
+      } catch (Throwable $e) {
+        $err = 'Admin login error (check if admins table exists).';
+      }
     } else {
-      $_SESSION['user_id']   = $u['id'];
-      $_SESSION['user_name'] = $u['name'];
-      header('Location: index.php');
-      exit;
+      //  User login
+      $stmt = $pdo->prepare("SELECT id, name, email, number, password FROM users WHERE email = ?");
+      $stmt->execute([$email]);
+      $u = $stmt->fetch();
+      if (!$u || !password_verify($pass, $u['password'])) {
+        $err = 'Invalid email or password.';
+      } else {
+        $_SESSION['user_id']   = $u['id'];
+        $_SESSION['user_name'] = $u['name'];
+        header('Location: index.php');
+        exit;
+      }
     }
   }
 }
 
-// show success banner if redirected from register
+// success banner after register
 $justRegistered = isset($_GET['registered']) && $_GET['registered'] === '1';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +95,14 @@ $justRegistered = isset($_GET['registered']) && $_GET['registered'] === '1';
           <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
           <label>Password</label>
           <input type="password" name="password" required>
+        </div>
+
+        <div class="field">
+          <label>Login as</label>
+          <select name="login_as">
+            <option value="user" selected>User</option>
+            <option value="admin" >Admin</option>
+          </select>
         </div>
 
         <div class="row" style="margin-top:6px;">

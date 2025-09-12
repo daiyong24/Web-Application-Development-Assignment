@@ -45,6 +45,12 @@ CREATE TABLE bookings (
   FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 );
 
-ALTER TABLE users
-  ADD COLUMN updated_at TIMESTAMP NULL DEFAULT NULL
-  AFTER password;
+-- Admins
+CREATE TABLE admins (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  role ENUM('admin','superadmin') NOT NULL DEFAULT 'admin',
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

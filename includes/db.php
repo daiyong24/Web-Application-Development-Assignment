@@ -1,9 +1,8 @@
 <?php
-// Update these to match your local MySQL
 $DB_HOST = 'localhost';
 $DB_NAME = 'cleaning_db';
 $DB_USER = 'root';
-$DB_PASS = ''; // XAMPP default is empty
+$DB_PASS = ''; 
 
 $dsn = "mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4";
 
