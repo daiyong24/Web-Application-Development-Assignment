@@ -1,232 +1,123 @@
 <?php
 // includes/payment_return.php
-// Handles the mock gateway "Proceed / Cancel" buttons for both flows:
-//   1) Cleaning  -> serviceDetails.php
-//   2) Move In/Out -> serviceDetails-moveInOut.php
-
 if (session_status() === PHP_SESSION_NONE) session_start();
+require __DIR__ . '/../includes/db.php';
 
-function redirect_default_with_error(string $msg) {
-  header('Location: ../serviceDetails.php?step=4&error=' . urlencode($msg));
+// 0) If user clicked Cancel or session is missing, bounce back.
+$btnStatus = $_POST['Status'] ?? '0'; // "1" (Proceed) or "0" (Cancel)
+if ($btnStatus !== '1' || empty($_SESSION['pending_payment']) || empty($_SESSION['user_id'])) {
+  header('Location: ../serviceDetails.php?step=4&error=cancelled');
   exit;
 }
 
-if (empty($_SESSION['pending_payment'])) {
-  redirect_default_with_error('No payment session.');
-}
-
+// 1) Server-trusted data from the flow before the gateway
 $pending = $_SESSION['pending_payment'];
-$type    = $pending['type'] ?? 'cleaning';  // 'move' or 'cleaning'
-$status  = $_POST['Status'] ?? '0';         // mock gateway: '1' success, '0' cancel
+$b       = $pending['booking'] ?? [];
+$expectedAmount = (float)($pending['total_price'] ?? 0.0);
+$userId  = (int)$_SESSION['user_id'];
 
-// ---------- COMMON DB helpers ----------
-/** Create PDO. Adjust if you keep a central db.php instead. */
-function db(): PDO {
-  $DB_HOST = 'localhost';
-  $DB_NAME = 'cleaning_db';
-  $DB_USER = 'root';
-  $DB_PASS = '';
-  return new PDO(
-    "mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4",
-    $DB_USER, $DB_PASS,
-    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-  );
+// Safety check
+if ($expectedAmount <= 0) {
+  http_response_code(400);
+  die('Invalid amount in session.');
 }
 
-/** Ensure a service row exists and return its id. */
-function ensure_service(PDO $pdo, string $name, string $desc, int $price): int {
-  $q = $pdo->prepare("SELECT id FROM services WHERE name = ? LIMIT 1");
-  $q->execute([$name]);
-  $id = $q->fetchColumn();
-  if ($id) return (int)$id;
+// 2) Build address_text (matches your schema: addresses.address_text)
+$address_text = trim(
+  ($b['address_line1'] ?? '') .
+  ((isset($b['postcode']) && $b['postcode'] !== '') ? (', ' . $b['postcode']) : '') .
+  ((isset($b['city'])     && $b['city']     !== '') ? (' ' . $b['city'])     : '')
+);
 
-  $ins = $pdo->prepare("INSERT INTO services (name, description, price) VALUES (?,?,?)");
-  $ins->execute([$name, $desc, $price]);
-  return (int)$pdo->lastInsertId();
+// 3) Service metadata (same slugs you use on serviceDetails.php)
+$serviceSlug = $b['service'] ?? '';
+$SERVICE_MAP = [
+  'house-cleaning'  => ['name' => 'House Cleaning',  'description' => 'Standard Cleaning', 'price' => 140],
+  'office-cleaning' => ['name' => 'Office Cleaning', 'description' => 'Standard Cleaning', 'price' => 250],
+  'airbnb-cleaning' => ['name' => 'AirBnb Cleaning', 'description' => 'Turnover Cleaning', 'price' => 160],
+];
+$meta = $SERVICE_MAP[$serviceSlug] ?? ['name'=>'Cleaning Service','description'=>'Standard','price'=>100];
+
+// 4) Helper: does `bookings` table have a `status` column?
+function bookings_has_status_column(PDO $pdo): bool {
+  $sql = "SELECT 1
+          FROM INFORMATION_SCHEMA.COLUMNS
+          WHERE TABLE_SCHEMA = DATABASE()
+            AND TABLE_NAME   = 'bookings'
+            AND COLUMN_NAME  = 'status'
+          LIMIT 1";
+  return (bool)$pdo->query($sql)->fetchColumn();
 }
+$hasStatus = bookings_has_status_column($pdo);
 
-// ==========================================================
-// SUCCESS
-// ==========================================================
-if ($status === '1') {
+// 5) Persist everything
+try {
+  $pdo->beginTransaction();
 
-  if ($type === 'move') {
-    // All the info we stored before redirecting to the gateway
-    $b            = $pending['booking']      ?? [];
-    $totalPrice   = (int)($pending['total_price'] ?? 0);
-    $serviceMeta  = $pending['service_meta'] ?? ['name' => 'Move In / Move Out', 'description' => '', 'price' => $totalPrice];
-    $addressText  = $pending['address_text'] ?? '';
-    $schedule     = $pending['schedule']     ?? 'One-time (Move)';
+  // (a) Address
+  $insAddr = $pdo->prepare("INSERT INTO addresses (user_id, address_text) VALUES (?, ?)");
+  $insAddr->execute([$userId, $address_text]);
+  $addressId = (int)$pdo->lastInsertId();
 
-    try {
-      $pdo = db();
-      $pdo->beginTransaction();
+  // (b) Ensure service exists, get service_id
+  $selSvc = $pdo->prepare("SELECT id FROM services WHERE name=? LIMIT 1");
+  $selSvc->execute([$meta['name']]);
+  $serviceId = (int)($selSvc->fetchColumn() ?: 0);
 
-      // 1) user_id – prefer the logged-in user, else upsert by email
-      $uid = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : 0;
-      if (!$uid) {
-        $email = trim($b['email'] ?? '');
-        if ($email !== '') {
-          $s = $pdo->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
-          $s->execute([$email]);
-          $uid = (int)$s->fetchColumn();
-        }
-        if (!$uid) {
-          $insU = $pdo->prepare("INSERT INTO users (name,email,number,password) VALUES (?,?,?,?)");
-          $insU->execute([
-            $b['name']   ?? '',
-            $b['email']  ?? '',
-            $b['number'] ?? '',
-            password_hash('changeme', PASSWORD_BCRYPT)
-          ]);
-          $uid = (int)$pdo->lastInsertId();
-        }
-      }
-
-      // 2) address
-      $insA = $pdo->prepare("INSERT INTO addresses (user_id,address_text) VALUES (?,?)");
-      $insA->execute([$uid, $addressText]);
-      $addrId = (int)$pdo->lastInsertId();
-
-      // 3) service
-      $serviceId = ensure_service($pdo, $serviceMeta['name'], ($serviceMeta['description'] ?? ''), (int)($serviceMeta['price'] ?? $totalPrice));
-
-      // 4) booking (payment_method = Online)
-      $insB = $pdo->prepare("
-        INSERT INTO bookings (user_id,address_id,service_id,schedule,date,payment_method,total_price)
-        VALUES (?,?,?,?,?,?,?)
-      ");
-      $insB->execute([
-        $uid,
-        $addrId,
-        $serviceId,
-        $schedule,
-        $b['date'] ?? date('Y-m-d'),
-        'Online',
-        $totalPrice
-      ]);
-
-      $pdo->commit();
-
-      // Build receipt for success page
-      $_SESSION['move_receipt'] = [
-        'service' => $serviceMeta['name'],
-        'date'    => $b['date'] ?? '',
-        'address' => $addressText,
-        'name'    => $b['name'] ?? '',
-        'email'   => $b['email'] ?? '',
-        'number'  => $b['number'] ?? '',
-        'payment' => 'Online',
-        'total'   => $totalPrice,
-      ];
-
-      // Clean temp
-      unset($_SESSION['pending_payment'], $_SESSION['move']);
-
-      header('Location: ../serviceDetails-moveInOut.php?success=1');
-      exit;
-
-    } catch (Exception $e) {
-      if (isset($pdo)) $pdo->rollBack();
-      unset($_SESSION['pending_payment']);
-      header('Location: ../serviceDetails-moveInOut.php?step=4&error=' . urlencode('DB error: ' . $e->getMessage()));
-      exit;
-    }
+  if (!$serviceId) {
+    $insSvc = $pdo->prepare("INSERT INTO services (name, description, price) VALUES (?,?,?)");
+    $insSvc->execute([$meta['name'], $meta['description'], (int)$meta['price']]);
+    $serviceId = (int)$pdo->lastInsertId();
   }
 
-  // ----------------- Cleaning flow (default) -----------------
-  // NOTE: Your current cleaning online path never wrote to DB.
-  // To save it here, we need service meta and a one-line address.
-  // Easiest fix: when you set $_SESSION['pending_payment'] in serviceDetails.php,
-  // also include 'service_meta' and 'address_text' exactly like the Move flow.
-  $b          = $pending['booking'] ?? [];
-  $totalPrice = (int)($pending['total_price'] ?? 0);
-  $service    = $pending['service_meta']['name']        ?? 'Cleaning Service';
-  $desc       = $pending['service_meta']['description'] ?? 'Standard Cleaning';
-  $basePrice  = (int)($pending['service_meta']['price'] ?? $totalPrice);
-  $addressTxt = $pending['address_text']
-    ?? trim(
-        ($b['address_line1'] ?? '') .
-        (!empty($b['postcode']) ? ', '.$b['postcode'] : '') .
-        (!empty($b['city'])     ? ' '.$b['city']       : '')
-       );
-  $schedule   = $b['schedule'] ?? 'One-time';
+  // (c) Booking
+  $baseCols   = "user_id, address_id, service_id, schedule, date, payment_method, total_price";
+  $basePlace  = "?, ?, ?, ?, ?, ?, ?";
+  $baseParams = [
+    $userId,
+    $addressId,
+    $serviceId,
+    $b['schedule'] ?? 'One-time',
+    $b['date']     ?? date('Y-m-d'),
+    'Online',
+    $expectedAmount
+  ];
 
-  try {
-    $pdo = db();
-    $pdo->beginTransaction();
-
-    // user
-    $uid = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : 0;
-    if (!$uid) {
-      $email = trim($b['email'] ?? '');
-      if ($email !== '') {
-        $s = $pdo->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
-        $s->execute([$email]);
-        $uid = (int)$s->fetchColumn();
-      }
-      if (!$uid) {
-        $insU = $pdo->prepare("INSERT INTO users (name,email,number,password) VALUES (?,?,?,?)");
-        $insU->execute([
-          $b['name']   ?? '',
-          $b['email']  ?? '',
-          $b['number'] ?? '',
-          password_hash('changeme', PASSWORD_BCRYPT)
-        ]);
-        $uid = (int)$pdo->lastInsertId();
-      }
-    }
-
-    // address
-    $insA = $pdo->prepare("INSERT INTO addresses (user_id,address_text) VALUES (?,?)");
-    $insA->execute([$uid, $addressTxt]);
-    $addrId = (int)$pdo->lastInsertId();
-
-    // service
-    $serviceId = ensure_service($pdo, $service, $desc, $basePrice);
-
-    // booking (Online)
-    $insB = $pdo->prepare("
-      INSERT INTO bookings (user_id,address_id,service_id,schedule,date,payment_method,total_price)
-      VALUES (?,?,?,?,?,?,?)
-    ");
-    $insB->execute([
-      $uid, $addrId, $serviceId,
-      $schedule,
-      $b['date'] ?? date('Y-m-d'),
-      'Online',
-      $totalPrice
-    ]);
-
-    $pdo->commit();
-
-    $_SESSION['receipt'] = $b;
-    $_SESSION['receipt']['total_price'] = $totalPrice;
-    $_SESSION['receipt']['address_text'] = $addressTxt;
-
-    $_SESSION['booking'] = [];
-    unset($_SESSION['pending_payment']);
-
-    header('Location: ../serviceDetails.php?success=1');
-    exit;
-
-  } catch (Exception $e) {
-    if (isset($pdo)) $pdo->rollBack();
-    unset($_SESSION['pending_payment']);
-    header('Location: ../serviceDetails.php?step=4&error=' . urlencode('DB error: ' . $e->getMessage()));
-    exit;
+  if ($hasStatus) {
+    $sqlB   = "INSERT INTO bookings ($baseCols, status) VALUES ($basePlace, ?)";
+    $params = array_merge($baseParams, ['Confirmed']);
+  } else {
+    $sqlB   = "INSERT INTO bookings ($baseCols) VALUES ($basePlace)";
+    $params = $baseParams;
   }
-}
 
-// ==========================================================
-// CANCELLED
-// ==========================================================
-unset($_SESSION['pending_payment']);
+  $insB = $pdo->prepare($sqlB);
+  $insB->execute($params);
 
-if ($type === 'move') {
-  header('Location: ../serviceDetails-moveInOut.php?step=4&error=' . urlencode('Payment cancelled.'));
+  $pdo->commit();
+
+  // 6) Build the same receipt payload your success page expects
+  $_SESSION['receipt'] = [
+    'service'        => $b['service']     ?? '',
+    'location'       => $b['location']    ?? '',
+    'address_text'   => $address_text,
+    'date'           => $b['date']        ?? date('Y-m-d'),
+    'schedule'       => $b['schedule']    ?? 'One-time',
+    'payment_method' => 'Online',
+    'total_price'    => $expectedAmount,
+    // Optional: show reference if you kept it in the gateway
+    'reference'      => $_SESSION['payment_ref'] ?? '',
+  ];
+
+  // 7) Cleanup and redirect to the SAME success screen as cash flow
+  $_SESSION['booking'] = [];
+  unset($_SESSION['pending_payment'], $_SESSION['payment_ref']);
+
+  header('Location: ../serviceDetails.php?success=1');
   exit;
-}
 
-// default cleaning
-redirect_default_with_error('Payment cancelled.');
+} catch (Throwable $e) {
+  if ($pdo->inTransaction()) $pdo->rollBack();
+  // Show exact error while developing (hide in production)
+  echo 'Error saving booking: ' . htmlspecialchars($e->getMessage());
+}

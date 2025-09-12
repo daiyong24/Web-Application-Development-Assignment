@@ -23,19 +23,26 @@ SELECT
   b.date,
   b.payment_method,
   b.total_price,
-  a.address_text
+  a.address_text,
+  COALESCE(b.status,'Pending') AS status  -- NEW
 FROM bookings b
 JOIN services  s ON s.id = b.service_id
 JOIN addresses a ON a.id = b.address_id
 WHERE b.user_id = ?
-ORDER BY b.id ASC   -- or DESC if you want newest first
+ORDER BY b.id $sort   -- use the chosen sort
 ";
+
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$userId]);
 $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-function money_my($v){ return 'RM ' . number_format((float)$v, 2); }
+if (!function_exists('money_my')) {
+  function money_my($v) {
+    return 'RM ' . number_format((float)$v, 2);
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
