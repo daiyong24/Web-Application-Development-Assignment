@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
                     <label for="message">Special Request</label>
                     <textarea id="message" name="message" rows="4" required><?php echo isset($_POST['message']) ? htmlspecialchars($_POST['message']) : ''; ?></textarea>
                     
-                    <button type="submit" name="submit_contact">Send Form Details</button>
+                    <button type="submit" name="submit_contact">Submit</button>
                 </form>
             </div>
     
