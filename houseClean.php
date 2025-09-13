@@ -5,12 +5,13 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Shine & Sparkle - Service Inquiry/Office Cleaning</title>
+  <title>Shine & Sparkle - Service Inquiry/House Cleaning</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE-edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link type="text/css" rel="stylesheet" href="css/style.css" />
   <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
+  <link type="text/css" rel="stylesheet" href="css/style-service.css"/>
   <style>
     /* Container + padding for arrows */
     .ss-lite {

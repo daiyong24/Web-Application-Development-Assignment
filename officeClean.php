@@ -11,7 +11,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link type="text/css" rel="stylesheet" href="css/style.css" />
   <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
-  <link type="text/css" rel="stylesheet" href="css/style-officeClean.css"/>
+  <link type="text/css" rel="stylesheet" href="css/style-service.css"/>
 </head>
 <body data-user-id="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0 ?>">
 <?php include 'components/header.php'; ?>

@@ -65,3 +65,17 @@ CREATE TABLE contact_messages (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   is_read TINYINT(1) DEFAULT 0
 );
+
+ALTER TABLE bookings
+  ADD COLUMN status ENUM('Pending','Confirmed','Completed','Cancelled')
+  NOT NULL DEFAULT 'Pending'
+  AFTER total_price;
+
+
+INSERT INTO admins (name, email, role, password)
+VALUES (
+  'Super Admin',
+  'admin@example.com',
+  'superadmin',
+  '$2y$10$TXTAszHvLUKf1I/MRyVDAOpSjASzY/qpGiLvCzzYO9PoDpCWizcve'
+);

@@ -11,76 +11,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link type="text/css" rel="stylesheet" href="css/style.css" />
   <link type="text/css" rel="stylesheet" href="css/style-switcher.css" />
-  <style>
-    /* Container + padding for arrows */
-    .ss-lite {
-      position: relative;
-      max-width: 1400px;
-      margin: 16px auto;
-      padding: 0 52px; /* space for arrows */
-      box-sizing: border-box;
-      font-family: system-ui, Arial, sans-serif;
-    }
-
-    /* Horizontal scroll track */
-    .ss-lite .ss-track {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Card */
-    .ss-lite .ss-card {
-      flex: 0 0 340px; /* one card width */
-      scroll-snap-align: start;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .ss-lite .ss-card img {
-      display: block;
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-bottom: 1px solid #eee;
-    }
-
-    .ss-lite .ss-card  {
-      padding: 10px;
-
-    }
-
-    /* Optional small dot */
-    .ss-lite .ss-card .round{
-      position:absolute; right:10px; bottom:10px;
-      width:10px; height:10px; background:#A8DFFA; border-radius:50%;
-    }
-
-    /* Arrows */
-    .ss-lite .ss-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 32px; height: 32px;
-      border: 0; border-radius: 50%;
-      background: #000; color: #fff;
-      opacity: .6; cursor: pointer;
-    }
-    .ss-lite .ss-btn:hover { opacity: .85; }
-    .ss-lite .ss-btn:disabled { opacity: .25; cursor: default; }
-    .ss-lite .ss-btn.prev { left: 6px; }
-    .ss-lite .ss-btn.next { right: 6px; }
-
-    @media (max-width: 640px) {
-      .ss-lite { padding: 0 38px; }
-      .ss-lite .ss-card { flex-basis: 220px; }
-    }
-  </style>
+  <link type="text/css" rel="stylesheet" href="css/style-service.css"/>
 </head>
 <body data-user-id="<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0 ?>">
 <?php include 'components/header.php'; ?>
