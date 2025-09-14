@@ -3,14 +3,12 @@
 require_once __DIR__ . '/includes/auth.php'; 
 require_once __DIR__ . '/includes/db.php';   
 
-// serviceDetails-move.php  —  Move In / Move Out booking wizard
 if (session_status() === PHP_SESSION_NONE) session_start();
 if (!isset($_SESSION['user_id'])) {
   $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
   header('Location: login.php'); exit;
 }
 
-/* --- DB config (adjust if needed) --- */
 $DB_HOST = 'localhost';
 $DB_NAME = 'cleaning_db';
 $DB_USER = 'root';

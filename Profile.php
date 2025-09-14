@@ -2,7 +2,7 @@
 require __DIR__ . '/includes/auth.php';
 require __DIR__ . '/includes/db.php';
 
-// 1) Load current user
+// Load current user
 $userId = $_SESSION['user_id'];
 $stmt = $pdo->prepare("SELECT id, name, email, number, password, updated_at FROM users WHERE id = ?");
 $stmt->execute([$userId]);
@@ -15,7 +15,7 @@ if (!$user) {
 $errors = [];
 $success = "";
 
-// 2) Handle profile save (name/phone)
+//Handle profile save (name/phone)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_profile'])) {
   $name   = trim($_POST['name'] ?? '');
   $number = trim($_POST['number'] ?? '');
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_profile'])) {
   }
 }
 
-// 3) Handle password change
+// Handle password change
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
   $old = $_POST['old_password'] ?? '';
   $new = $_POST['new_password'] ?? '';
