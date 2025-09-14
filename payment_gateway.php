@@ -3,7 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 require __DIR__ . '/includes/db.php'; // if you don’t need DB here, you can remove this
 
-// 1) Make sure we have a pending payment (set in serviceDetails.php when payment method = Online)
+// Make sure we have a pending payment (set in serviceDetails.php when payment method = Online)
 if (empty($_SESSION['pending_payment']) || empty($_SESSION['user_id'])) {
   // No checkout data -> send user back to the service details flow
   header('Location: serviceDetails.php?step=4');
@@ -14,7 +14,7 @@ $pending = $_SESSION['pending_payment'];
 $b       = $pending['booking'] ?? [];        // contains: service, location, schedule, date, address_line1, postcode, city, number, payment_method
 $amount  = (float)($pending['total_price'] ?? 0);
 
-// 2) Service name for display (same slugs you used on serviceDetails.php)
+//Service name for display 
 $SERVICE_NAME_MAP = [
   'house-cleaning'  => 'House Cleaning',
   'office-cleaning' => 'Office Cleaning',
@@ -24,13 +24,13 @@ $SERVICE_NAME_MAP = [
 $serviceSlug = $b['service'] ?? '';
 $serviceName = $SERVICE_NAME_MAP[$serviceSlug] ?? 'Cleaning Service';
 
-// 3) Simple reference we keep consistent in session (so return page can log it)
+//Simple reference we keep consistent in session 
 if (empty($_SESSION['payment_ref'])) {
   $_SESSION['payment_ref'] = 'REF' . strtoupper(bin2hex(random_bytes(4)));
 }
 $reference = $_SESSION['payment_ref'];
 
-// 4) Safety guard: don’t render a RM0 page
+//Safety guard: don’t render a RM0 page
 if ($amount <= 0) {
   http_response_code(400);
   die('<p style="font:16px sans-serif">Invalid amount. Please go back and reselect your service.</p>');

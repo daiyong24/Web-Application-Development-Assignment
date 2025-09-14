@@ -1,8 +1,14 @@
-* {
+ * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
     }
     
     body {
@@ -13,16 +19,24 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
+    }
+    
+    .page-container {
+      width: 100%;
+      max-width: 1000px;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     
     .payment-container {
-      max-width: 800px;
       width: 100%;
       background: white;
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+      margin: 0 auto;
+      overflow: visible;
     }
     
     .payment-header {
@@ -32,12 +46,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      border-radius: 12px 12px 0 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-shrink: 0;
     }
     
     .logo i {
@@ -47,6 +67,7 @@
     .logo h1 {
       font-size: 24px;
       font-weight: 600;
+      white-space: nowrap;
     }
     
     .secure-badge {
@@ -57,10 +78,13 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      white-space: nowrap;
     }
     
     .payment-content {
       display: flex;
+      flex-wrap: wrap;
+      overflow: visible;
     }
     
     .payment-methods {
@@ -215,6 +239,7 @@
       color: #64748b;
       font-size: 14px;
       border-top: 1px solid #e2e8f0;
+      border-radius: 0 0 12px 12px;
     }
     
     .footer p {
@@ -302,7 +327,7 @@
       color: #3B82F6;
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .payment-content {
         flex-direction: column;
       }
@@ -315,6 +340,23 @@
         border-right: none;
         border-bottom: 1px solid #e2e8f0;
       }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+        align-items: flex-start;
+      }
+      
+      .payment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+      }
+      
+      .secure-badge {
+        margin-top: 10px;
+      }
       
       .form-row {
         flex-direction: column;
@@ -323,5 +365,26 @@
       
       .ewallet-options {
         flex-direction: column;
+      }
+      
+      .payment-methods, .payment-form {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo h1 {
+        font-size: 20px;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+    
+
+    @media (min-width: 1000px) {
+      .page-container {
+        padding: 20px 0;
       }
     }
