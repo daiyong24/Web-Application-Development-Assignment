@@ -15,7 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
     if ($id > 0) {
         $stmt = $pdo->prepare("UPDATE contact_messages SET is_read = ? WHERE id = ?");
         $stmt->execute([$is_read, $id]);
-        $msg = "Message #$id updated.";
+        $qs = ($is_read === 0) ? "?id={$id}&noauto=1" : "?id={$id}";
+        header('Location: ' . $_SERVER['PHP_SELF'] . $qs);
+        exit;
     }
 }
 
@@ -64,8 +66,12 @@ if (!empty($_GET['id'])) {
     $detail = $d->fetch();
     
     // Mark as read when viewing
-    if ($detail && !$detail['is_read']) {
-        $pdo->prepare("UPDATE contact_messages SET is_read = 1 WHERE id = ?")->execute([$detail['id']]);
+    if ($_SERVER['REQUEST_METHOD'] === 'GET'
+        && $detail
+        && !$detail['is_read']
+        && empty($_GET['noauto'])) {
+        $pdo->prepare("UPDATE contact_messages SET is_read = 1 WHERE id = ?")
+            ->execute([$detail['id']]);
         $detail['is_read'] = 1;
     }
 }
